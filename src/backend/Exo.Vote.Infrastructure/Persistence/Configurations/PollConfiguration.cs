@@ -1,13 +1,12 @@
-using Exo.Vote.Domain.Entities;
 using Exo.Vote.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Exo.Vote.Infrastructure.Persistence.Configurations;
 
-public class PollConfiguration : IEntityTypeConfiguration<Poll>
+public class PollConfiguration : IEntityTypeConfiguration<PollEntity>
 {
-    public void Configure(EntityTypeBuilder<Poll> builder)
+    public void Configure(EntityTypeBuilder<PollEntity> builder)
     {
         builder.ToTable("polls");
 

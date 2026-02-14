@@ -1,12 +1,11 @@
-using Exo.Vote.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Exo.Vote.Infrastructure.Persistence.Configurations;
 
-public class VoteConfiguration : IEntityTypeConfiguration<Vote>
+public class VoteConfiguration : IEntityTypeConfiguration<VoteEntity>
 {
-    public void Configure(EntityTypeBuilder<Vote> builder)
+    public void Configure(EntityTypeBuilder<VoteEntity> builder)
     {
         builder.ToTable("votes");
 

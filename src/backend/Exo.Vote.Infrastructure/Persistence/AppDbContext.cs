@@ -1,6 +1,5 @@
 using System.Reflection;
 using Exo.Vote.Application.Common.Interfaces;
-using Exo.Vote.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Exo.Vote.Infrastructure.Persistence;
@@ -12,9 +11,9 @@ public class AppDbContext : DbContext, IAppDbContext
     {
     }
 
-    public DbSet<Poll> Polls => Set<Poll>();
-    public DbSet<PollOption> PollOptions => Set<PollOption>();
-    public DbSet<Vote> Votes => Set<Vote>();
+    public DbSet<PollEntity> Polls => Set<PollEntity>();
+    public DbSet<PollOptionEntity> PollOptions => Set<PollOptionEntity>();
+    public DbSet<VoteEntity> Votes => Set<VoteEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
