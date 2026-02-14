@@ -1,6 +1,7 @@
 # ExoVote — Coding Standards
 
 ## General Rules
+- **ALWAYS use `pnpm`** — never `npm` or `yarn`, no exceptions
 - **Conventional commits**: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `test:`
 - **Branch naming**: `feature/issue-{N}-description`, `fix/issue-{N}-description`
 - **No direct push to main** — always PR from a feature/fix branch

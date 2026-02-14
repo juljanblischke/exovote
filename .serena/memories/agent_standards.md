@@ -32,6 +32,7 @@ Break the issue into concrete, actionable tasks. Each task should:
 
 ### 5. Implement
 Follow the coding standards from `coding_standards.md`. Key reminders:
+- **ALWAYS use `pnpm`** — never `npm` or `yarn`
 - **Mediator**, not MediatR
 - Server Components by default
 - i18n for all user-facing text
@@ -48,7 +49,7 @@ gh pr create --title "feat: description" --body "Closes #{ISSUE_NUMBER}"
 - **Reads**: `src/frontend/` code, `messages/*.json`, `styles/globals.css`
 - **Writes**: React components, pages, styles, translations
 - **Tests with**: Vitest + React Testing Library
-- **Key rule**: Server Components default, `"use client"` only for interactivity
+- **Key rule**: Server Components default, `"use client"` only for interactivity, always `pnpm`
 
 ### @backend Agent
 - **Reads**: `src/backend/` code, entity configs, migrations
