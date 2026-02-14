@@ -67,7 +67,7 @@
 - Theme via CSS variables in `globals.css` + `next-themes`
 - Icons from `lucide-react`
 
-### Dependencies (npm)
+### Dependencies (pnpm)
 - `next` 15 + `react` 19 — framework
 - `next-intl` — internationalization
 - `next-themes` — dark/light mode

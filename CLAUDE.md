@@ -12,7 +12,7 @@ Open-source, self-hosted voting & polling platform. Create polls, share links, c
 ## Commands
 ```bash
 # Frontend dev
-cd src/frontend && npm run dev
+cd src/frontend && pnpm dev
 
 # Backend dev
 cd src/backend && dotnet run --project Exo.Vote.Api
@@ -24,8 +24,13 @@ docker-compose up -d
 cd src/backend && dotnet test
 
 # Run frontend tests
-cd src/frontend && npm run test
+cd src/frontend && pnpm test
+
+# Install frontend deps
+cd src/frontend && pnpm install
 ```
+
+> **IMPORTANT**: Always use `pnpm`, never `npm` or `yarn`.
 
 ## Architecture
 

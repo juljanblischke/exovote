@@ -48,8 +48,8 @@ docker-compose up -d
 ```bash
 # Frontend
 cd src/frontend
-npm install
-npm run dev
+pnpm install
+pnpm dev
 
 # Backend
 cd src/backend

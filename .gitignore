@@ -47,9 +47,6 @@ src/frontend/coverage/
 src/frontend/.vercel/
 
 ## Package manager
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 .pnpm-store/
 
