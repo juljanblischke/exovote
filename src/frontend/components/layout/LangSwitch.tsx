@@ -3,7 +3,7 @@
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { Languages } from 'lucide-react';
-import { routing } from '@/lib/i18n/routing';
+import { isValidLocale } from '@/lib/i18n/routing';
 
 export function LangSwitch() {
   const locale = useLocale();
@@ -15,7 +15,7 @@ export function LangSwitch() {
 
     // Replace the locale segment in the pathname
     const segments = pathname.split('/');
-    if (routing.locales.includes(segments[1] as any)) {
+    if (isValidLocale(segments[1])) {
       segments[1] = nextLocale;
     } else {
       segments.splice(1, 0, nextLocale);
