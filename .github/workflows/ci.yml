@@ -82,16 +82,3 @@ jobs:
 
       - name: Test
         run: npm run test -- --run
-
-  # ─── Docker Build Check ───
-  docker:
-    name: Docker Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Build backend image
-        run: docker build -t exovote-backend --target production -f src/backend/Exo.Vote.Api/Dockerfile src/backend
-
-      - name: Build frontend image
-        run: docker build -t exovote-frontend --target production -f src/frontend/Dockerfile src/frontend

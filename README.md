@@ -93,4 +93,4 @@ This project is designed for deployment in Germany and follows:
 
 ## License
 
-TBD
+[MIT](LICENSE)
