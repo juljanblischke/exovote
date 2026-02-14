@@ -1,0 +1,99 @@
+# =========================
+# .NET / C# Backend
+# =========================
+## Build results
+src/backend/**/bin/
+src/backend/**/obj/
+src/backend/**/out/
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build logs
+*.log
+msbuild*.wrn
+msbuild*.err
+
+## Visual Studio
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+## Rider
+.idea/
+
+## NuGet
+**/packages/
+*.nupkg
+**/[Pp]ackages/
+
+## EF Core migrations (keep, but ignore local db)
+*.db
+*.db-shm
+*.db-wal
+
+# =========================
+# Next.js / Node Frontend
+# =========================
+src/frontend/node_modules/
+src/frontend/.next/
+src/frontend/out/
+src/frontend/.turbo/
+src/frontend/coverage/
+src/frontend/.vercel/
+
+## Package manager
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# =========================
+# Environment & Secrets
+# =========================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+.docker-data/
+
+# =========================
+# IDE
+# =========================
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+!.vscode/extensions.json
+
+# =========================
+# Serena
+# =========================
+.serena/indexes/
+.serena/*.db
+
+# =========================
+# Testing
+# =========================
+**/TestResults/
+coverage/
+*.trx

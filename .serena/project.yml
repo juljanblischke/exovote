@@ -1,0 +1,32 @@
+language_server:
+  # C# backend
+  - language_id: csharp
+    command: OmniSharp
+    args:
+      - "-lsp"
+      - "--source"
+      - "src/backend"
+    extensions:
+      - ".cs"
+
+  # TypeScript/JavaScript frontend
+  - language_id: typescript
+    command: typescript-language-server
+    args:
+      - "--stdio"
+    extensions:
+      - ".ts"
+      - ".tsx"
+      - ".js"
+      - ".jsx"
+
+project_root: "."
+
+ignore_patterns:
+  - "node_modules"
+  - ".next"
+  - "bin"
+  - "obj"
+  - ".git"
+  - "coverage"
+  - ".docker-data"

@@ -1,0 +1,5 @@
+project_name: exovote
+languages:
+  - csharp
+  - typescript
+root_path: "."

@@ -1,0 +1,41 @@
+{
+  "common": {
+    "appName": "ExoVote",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Loschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "back": "Zuruck",
+    "next": "Weiter",
+    "submit": "Absenden",
+    "search": "Suchen"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "polls": "Umfragen",
+    "create": "Erstellen",
+    "about": "Uber uns",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "home": {
+    "hero": {
+      "title": "Abstimmungen leicht gemacht",
+      "subtitle": "Erstelle Umfragen, teile Links und sammle Stimmen in Echtzeit.",
+      "cta": "Umfrage erstellen"
+    }
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "madeWith": "Made with"
+  },
+  "cookie": {
+    "message": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen",
+    "learnMore": "Mehr erfahren"
+  }
+}

@@ -1,0 +1,245 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Primary: Rose/Red - Exostruction Brand */
+  --color-primary-50: hsl(355.7 100% 97.3%);
+  --color-primary-100: hsl(355.6 100% 94.7%);
+  --color-primary-200: hsl(352.7 96.1% 90%);
+  --color-primary-300: hsl(352.6 95.7% 81.8%);
+  --color-primary-400: hsl(351.3 94.5% 71.4%);
+  --color-primary-500: hsl(349.7 89.2% 60.2%);
+  --color-primary-600: hsl(346.8 77.2% 49.8%);
+  --color-primary-700: hsl(345.3 82.7% 40.8%);
+  --color-primary-800: hsl(343.4 79.7% 34.7%);
+  --color-primary-900: hsl(341.5 75.5% 30.4%);
+  --color-primary-950: hsl(343.1 87.7% 15.9%);
+
+  /* Neutral / Slate tones */
+  --color-neutral-50: hsl(210 40% 98%);
+  --color-neutral-100: hsl(210 40% 96.1%);
+  --color-neutral-200: hsl(214.3 31.8% 91.4%);
+  --color-neutral-300: hsl(212.7 26.8% 83.9%);
+  --color-neutral-400: hsl(215 20.2% 65.1%);
+  --color-neutral-500: hsl(215.4 16.3% 46.9%);
+  --color-neutral-600: hsl(215.3 19.3% 34.5%);
+  --color-neutral-700: hsl(215.3 25% 26.7%);
+  --color-neutral-800: hsl(217.2 32.6% 17.5%);
+  --color-neutral-900: hsl(222.2 47.4% 11.2%);
+  --color-neutral-950: hsl(224 71% 4%);
+
+  /* Semantic colors */
+  --color-success: hsl(142.1 76.2% 36.3%);
+  --color-warning: hsl(37.7 92.1% 50.2%);
+  --color-error: hsl(0 84.2% 60.2%);
+  --color-info: hsl(217.2 91.2% 59.8%);
+
+  /* Font family */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* Custom animations */
+  --animate-fade-in: fadeIn 0.6s ease-out forwards;
+  --animate-fade-in-up: fadeInUp 0.6s ease-out forwards;
+  --animate-slide-in-left: slideInLeft 0.5s ease-out forwards;
+  --animate-slide-in-right: slideInRight 0.5s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
+}
+
+/* CSS custom properties for light/dark mode theming */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(224 71% 4%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(224 71% 4%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(224 71% 4%);
+  --primary: hsl(346.8 77.2% 49.8%);
+  --primary-foreground: hsl(355.7 100% 97.3%);
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(346.8 77.2% 49.8%);
+}
+
+.dark {
+  --background: hsl(224 71% 4%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222.2 47.4% 11.2%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222.2 47.4% 11.2%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(346.8 77.2% 49.8%);
+  --primary-foreground: hsl(355.7 100% 97.3%);
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(346.8 77.2% 49.8%);
+}
+
+/* Base styles */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient utilities */
+.gradient-primary {
+  background: linear-gradient(135deg, hsl(346.8 77.2% 49.8%), hsl(330 80% 60%));
+}
+
+.gradient-dark {
+  background: linear-gradient(180deg, hsl(224 71% 4%) 0%, hsl(222.2 47.4% 11.2%) 100%);
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(at 40% 20%, hsl(346.8 77.2% 49.8% / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsl(330 80% 60% / 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsl(346.8 77.2% 49.8% / 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsl(280 80% 50% / 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsl(346.8 77.2% 49.8% / 0.1) 0px, transparent 50%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, hsl(346.8 77.2% 49.8%), hsl(330 80% 60%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

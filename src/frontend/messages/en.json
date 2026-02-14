@@ -1,0 +1,41 @@
+{
+  "common": {
+    "appName": "ExoVote",
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search"
+  },
+  "navigation": {
+    "home": "Home",
+    "polls": "Polls",
+    "create": "Create",
+    "about": "About",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy"
+  },
+  "home": {
+    "hero": {
+      "title": "Voting Made Easy",
+      "subtitle": "Create polls, share links and collect votes in real-time.",
+      "cta": "Create Poll"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "madeWith": "Made with"
+  },
+  "cookie": {
+    "message": "We use cookies to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "learnMore": "Learn more"
+  }
+}
