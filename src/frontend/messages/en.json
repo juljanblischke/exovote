@@ -17,6 +17,7 @@
     "home": "Home",
     "polls": "Polls",
     "create": "Create",
+    "createPoll": "Create Poll",
     "about": "About",
     "imprint": "Imprint",
     "privacy": "Privacy Policy"
@@ -30,7 +31,13 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "madeWith": "Made with"
+    "madeWith": "Made with",
+    "tagline": "Open-source, self-hosted voting & polling platform. Create polls, share links, collect votes with real-time results.",
+    "navigate": "Navigate",
+    "product": "Product",
+    "legal": "Legal",
+    "createPoll": "Create Poll",
+    "exovoteDescription": "Voting Platform"
   },
   "cookie": {
     "message": "We use cookies to improve your experience.",
@@ -39,6 +46,11 @@
     "learnMore": "Learn more"
   },
   "polls": {
+    "list": {
+      "title": "Polls",
+      "description": "Discover active polls or create your own.",
+      "createCta": "Create a Poll"
+    },
     "create": {
       "title": "Create Poll",
       "titleLabel": "Title",

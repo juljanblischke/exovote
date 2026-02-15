@@ -5,10 +5,10 @@
     "error": "Fehler",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "delete": "Loschen",
+    "delete": "Löschen",
     "edit": "Bearbeiten",
     "create": "Erstellen",
-    "back": "Zuruck",
+    "back": "Zurück",
     "next": "Weiter",
     "submit": "Absenden",
     "search": "Suchen"
@@ -17,7 +17,8 @@
     "home": "Startseite",
     "polls": "Umfragen",
     "create": "Erstellen",
-    "about": "Uber uns",
+    "createPoll": "Umfrage erstellen",
+    "about": "Über uns",
     "imprint": "Impressum",
     "privacy": "Datenschutz"
   },
@@ -30,7 +31,13 @@
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
-    "madeWith": "Made with"
+    "madeWith": "Made with",
+    "tagline": "Open-Source, selbst gehostete Abstimmungs- und Umfrageplattform. Erstelle Umfragen, teile Links und sammle Stimmen in Echtzeit.",
+    "navigate": "Navigieren",
+    "product": "Produkt",
+    "legal": "Rechtliches",
+    "createPoll": "Umfrage erstellen",
+    "exovoteDescription": "Abstimmungsplattform"
   },
   "cookie": {
     "message": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern.",
@@ -39,6 +46,11 @@
     "learnMore": "Mehr erfahren"
   },
   "polls": {
+    "list": {
+      "title": "Umfragen",
+      "description": "Entdecke aktive Umfragen oder erstelle deine eigene.",
+      "createCta": "Umfrage erstellen"
+    },
     "create": {
       "title": "Umfrage erstellen",
       "titleLabel": "Titel",
@@ -46,9 +58,9 @@
       "descriptionLabel": "Beschreibung",
       "descriptionPlaceholder": "Beschreibe, worum es in der Umfrage geht (optional)",
       "typeLabel": "Umfragetyp",
-      "optionsLabel": "Antwortmoglichkeiten",
+      "optionsLabel": "Antwortmöglichkeiten",
       "optionPlaceholder": "Option {number}",
-      "addOption": "Option hinzufugen",
+      "addOption": "Option hinzufügen",
       "removeOption": "Option entfernen",
       "minOptions": "Mindestens {min} Optionen erforderlich",
       "expirationLabel": "Ablaufdatum",
@@ -61,8 +73,8 @@
       "validation": {
         "titleRequired": "Ein Titel ist erforderlich",
         "titleMaxLength": "Der Titel darf maximal {max} Zeichen lang sein",
-        "optionRequired": "Jede Option muss ausgefullt sein",
-        "optionMaxLength": "Optionen durfen maximal {max} Zeichen lang sein",
+        "optionRequired": "Jede Option muss ausgefüllt sein",
+        "optionMaxLength": "Optionen dürfen maximal {max} Zeichen lang sein",
         "minOptions": "Mindestens {min} Optionen sind erforderlich",
         "maxOptions": "Maximal {max} Optionen sind erlaubt",
         "expirationFuture": "Das Ablaufdatum muss in der Zukunft liegen",
@@ -71,10 +83,10 @@
     },
     "view": {
       "createdAt": "Erstellt am {date}",
-      "expiresAt": "Lauft ab am {date}",
+      "expiresAt": "Läuft ab am {date}",
       "noExpiration": "Kein Ablaufdatum",
       "closedAt": "Geschlossen am {date}",
-      "votingDisabled": "Die Abstimmung ist fur diese Umfrage nicht mehr moglich.",
+      "votingDisabled": "Die Abstimmung ist für diese Umfrage nicht mehr möglich.",
       "alreadyVoted": "Du hast bereits abgestimmt."
     },
     "vote": {
@@ -83,24 +95,24 @@
       "voterNameHelp": "Dein Name wird anderen Teilnehmern angezeigt",
       "submitVote": "Abstimmen",
       "submitting": "Wird abgestimmt...",
-      "selectOption": "Wahle eine Option",
-      "selectOptions": "Wahle eine oder mehrere Optionen",
-      "rankOptions": "Ordne die Optionen nach Praferenz",
-      "rankHelp": "Ziehe die Optionen in die gewunschte Reihenfolge (1 = beste Wahl)",
+      "selectOption": "Wähle eine Option",
+      "selectOptions": "Wähle eine oder mehrere Optionen",
+      "rankOptions": "Ordne die Optionen nach Präferenz",
+      "rankHelp": "Ziehe die Optionen in die gewünschte Reihenfolge (1 = beste Wahl)",
       "success": "Deine Stimme wurde erfolgreich abgegeben!",
       "validation": {
         "nameRequired": "Dein Name ist erforderlich",
-        "selectionRequired": "Bitte wahle mindestens eine Option",
+        "selectionRequired": "Bitte wähle mindestens eine Option",
         "rankingRequired": "Bitte ordne alle Optionen"
       }
     },
     "types": {
       "singleChoice": "Einzelauswahl",
-      "singleChoiceDescription": "Teilnehmer wahlen genau eine Option",
+      "singleChoiceDescription": "Teilnehmer wählen genau eine Option",
       "multipleChoice": "Mehrfachauswahl",
-      "multipleChoiceDescription": "Teilnehmer wahlen eine oder mehrere Optionen",
+      "multipleChoiceDescription": "Teilnehmer wählen eine oder mehrere Optionen",
       "ranked": "Rangfolge",
-      "rankedDescription": "Teilnehmer ordnen die Optionen nach Praferenz"
+      "rankedDescription": "Teilnehmer ordnen die Optionen nach Präferenz"
     },
     "status": {
       "active": "Aktiv",
@@ -131,10 +143,10 @@
       "notFound": "Umfrage nicht gefunden",
       "notFoundDescription": "Die angeforderte Umfrage existiert nicht oder wurde entfernt.",
       "closed": "Diese Umfrage ist geschlossen",
-      "closedDescription": "Es konnen keine weiteren Stimmen abgegeben werden.",
+      "closedDescription": "Es können keine weiteren Stimmen abgegeben werden.",
       "duplicateVote": "Du hast bereits an dieser Umfrage teilgenommen.",
-      "validationFailed": "Bitte uberprufe deine Eingaben.",
-      "serverError": "Ein Fehler ist aufgetreten. Bitte versuche es spater erneut.",
+      "validationFailed": "Bitte überprüfe deine Eingaben.",
+      "serverError": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
       "connectionError": "Verbindung zum Server konnte nicht hergestellt werden."
     }
   }
