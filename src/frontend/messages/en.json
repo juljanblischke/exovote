@@ -37,5 +37,105 @@
     "accept": "Accept",
     "decline": "Decline",
     "learnMore": "Learn more"
+  },
+  "polls": {
+    "create": {
+      "title": "Create Poll",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Give your poll a title",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Describe what the poll is about (optional)",
+      "typeLabel": "Poll Type",
+      "optionsLabel": "Options",
+      "optionPlaceholder": "Option {number}",
+      "addOption": "Add option",
+      "removeOption": "Remove option",
+      "minOptions": "At least {min} options required",
+      "expirationLabel": "Expiration Date",
+      "expirationPlaceholder": "No expiration",
+      "expirationHelp": "The poll will automatically close when this date is reached",
+      "submitButton": "Create Poll",
+      "creating": "Creating...",
+      "success": "Poll created successfully!",
+      "shareLinkLabel": "Share link",
+      "validation": {
+        "titleRequired": "A title is required",
+        "titleMaxLength": "Title must be {max} characters or less",
+        "optionRequired": "Each option must be filled in",
+        "optionMaxLength": "Options must be {max} characters or less",
+        "minOptions": "At least {min} options are required",
+        "maxOptions": "A maximum of {max} options are allowed",
+        "expirationFuture": "Expiration date must be in the future",
+        "duplicateOption": "Duplicate options are not allowed"
+      }
+    },
+    "view": {
+      "createdAt": "Created on {date}",
+      "expiresAt": "Expires on {date}",
+      "noExpiration": "No expiration",
+      "closedAt": "Closed on {date}",
+      "votingDisabled": "Voting is no longer available for this poll.",
+      "alreadyVoted": "You have already voted."
+    },
+    "vote": {
+      "voterNameLabel": "Your Name",
+      "voterNamePlaceholder": "Enter your name",
+      "voterNameHelp": "Your name will be visible to other participants",
+      "submitVote": "Vote",
+      "submitting": "Submitting...",
+      "selectOption": "Select an option",
+      "selectOptions": "Select one or more options",
+      "rankOptions": "Rank the options by preference",
+      "rankHelp": "Drag options into your preferred order (1 = top choice)",
+      "success": "Your vote has been submitted successfully!",
+      "validation": {
+        "nameRequired": "Your name is required",
+        "selectionRequired": "Please select at least one option",
+        "rankingRequired": "Please rank all options"
+      }
+    },
+    "types": {
+      "singleChoice": "Single Choice",
+      "singleChoiceDescription": "Participants choose exactly one option",
+      "multipleChoice": "Multiple Choice",
+      "multipleChoiceDescription": "Participants choose one or more options",
+      "ranked": "Ranked",
+      "rankedDescription": "Participants rank options by preference"
+    },
+    "status": {
+      "active": "Active",
+      "closed": "Closed",
+      "archived": "Archived",
+      "expired": "Expired"
+    },
+    "results": {
+      "title": "Results",
+      "totalVotes": "{count, plural, =0 {No votes} one {1 vote} other {# votes}}",
+      "percentage": "{value}%",
+      "noVotes": "No votes have been cast yet",
+      "voterList": "Participants",
+      "showVoters": "Show participants",
+      "hideVoters": "Hide participants",
+      "averageRank": "Avg. rank: {rank}",
+      "liveUpdates": "Live updates",
+      "connected": "Connected",
+      "disconnected": "Disconnected",
+      "reconnecting": "Reconnecting..."
+    },
+    "share": {
+      "title": "Share Poll",
+      "copyLink": "Copy link",
+      "copied": "Copied!"
+    },
+    "errors": {
+      "notFound": "Poll not found",
+      "notFoundDescription": "The requested poll does not exist or has been removed.",
+      "closed": "This poll is closed",
+      "closedDescription": "No more votes can be submitted.",
+      "duplicateVote": "You have already participated in this poll.",
+      "validationFailed": "Please check your inputs.",
+      "serverError": "An error occurred. Please try again later.",
+      "connectionError": "Could not connect to the server."
+    }
   }
 }

@@ -12,6 +12,7 @@ public class Poll : BaseEntity
     public DateTime? ExpiresAt { get; set; }
     public PollStatus Status { get; set; } = PollStatus.Draft;
     public PollType Type { get; set; } = PollType.SingleChoice;
+    public DateTime? LastViewedAt { get; set; }
 
     public ICollection<PollOption> Options { get; set; } = new List<PollOption>();
     public ICollection<Vote> Votes { get; set; } = new List<Vote>();
