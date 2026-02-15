@@ -1,13 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link, usePathname, useRouter } from '@/lib/i18n/navigation';
 import { useTheme } from 'next-themes';
 import { Vote, Menu, X, Sun, Moon } from 'lucide-react';
-import { isValidLocale } from '@/lib/i18n/routing';
 
 export function Header() {
   const t = useTranslations('navigation');
@@ -43,14 +40,7 @@ export function Header() {
   ];
 
   const switchLocale = (targetLocale: string) => {
-    const segments = pathname.split('/');
-    if (isValidLocale(segments[1])) {
-      segments[1] = targetLocale;
-    } else {
-      segments.splice(1, 0, targetLocale);
-    }
-    const newPath = segments.join('/') || '/';
-    router.push(newPath);
+    router.replace(pathname, { locale: targetLocale as 'de' | 'en' });
   };
 
   return (

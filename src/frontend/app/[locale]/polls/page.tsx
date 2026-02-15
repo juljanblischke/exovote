@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/lib/i18n/navigation';
 import { Plus, BarChart3, Users, Clock } from 'lucide-react';
 
 export default function PollsPage() {

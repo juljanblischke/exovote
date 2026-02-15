@@ -2,9 +2,9 @@
 
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/lib/i18n/navigation';
 import { Plus, Trash2, Copy, Check, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/lib/i18n/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';

@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/lib/i18n/navigation';
 
 export default function HomePage() {
   const t = useTranslations('home');

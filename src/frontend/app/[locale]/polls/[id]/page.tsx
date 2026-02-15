@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import { Link } from '@/lib/i18n/navigation';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { PollHeader } from '@/components/polls/PollHeader';
