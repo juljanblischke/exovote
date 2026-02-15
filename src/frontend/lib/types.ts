@@ -28,12 +28,12 @@ export type PollResultOption = {
   sortOrder: number;
   voteCount: number;
   percentage: number;
-  voters: string[];
-  averageRank?: number;
+  voters?: string[];
+  averageRank?: number | null;
 };
 
 export type PollResults = {
   pollId: string;
-  totalVotes: number;
+  totalVoters: number;
   options: PollResultOption[];
 };

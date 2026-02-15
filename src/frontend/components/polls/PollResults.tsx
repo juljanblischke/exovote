@@ -161,18 +161,18 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
 
       {/* Total votes */}
       <p className="mb-4 text-sm text-[var(--muted-foreground)]">
-        {t('totalVotes', { count: results.totalVotes })}
+        {t('totalVotes', { count: results.totalVoters })}
       </p>
 
       {/* No votes */}
-      {results.totalVotes === 0 && (
+      {results.totalVoters === 0 && (
         <p className="py-8 text-center text-sm text-[var(--muted-foreground)]">
           {t('noVotes')}
         </p>
       )}
 
       {/* Results */}
-      {results.totalVotes > 0 && (
+      {results.totalVoters > 0 && (
         <div className="space-y-4">
           {sortedOptions.map((option, index) => (
             <ResultOption
@@ -180,7 +180,7 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
               option={option}
               index={index}
               maxVotes={maxVotes}
-              totalVotes={results.totalVotes}
+              totalVotes={results.totalVoters}
               pollType={pollType}
               isExpanded={expandedOptions.has(option.id)}
               onToggleVoters={() => toggleVoters(option.id)}
@@ -250,7 +250,7 @@ function ResultOption({
       </div>
 
       {/* Voter list toggle */}
-      {option.voters.length > 0 && (
+      {(option.voters ?? []).length > 0 && (
         <div>
           <button
             onClick={onToggleVoters}
@@ -264,13 +264,13 @@ function ResultOption({
             ) : (
               <>
                 <ChevronDown className="h-3 w-3" />
-                {t('showVoters')} ({option.voters.length})
+                {t('showVoters')} ({(option.voters ?? []).length})
               </>
             )}
           </button>
           {isExpanded && (
             <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {option.voters.map((voter, i) => (
+              {(option.voters ?? []).map((voter, i) => (
                 <span
                   key={i}
                   className="rounded-full bg-[var(--muted)] px-2.5 py-0.5 text-xs text-[var(--muted-foreground)]"
