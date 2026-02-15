@@ -70,15 +70,15 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
     setError(null);
 
     try {
-      let selections: Array<{ pollOptionId: string; rank?: number }>;
+      let selections: Array<{ optionId: string; rank?: number }>;
 
       if (poll.type === 'SingleChoice') {
-        selections = [{ pollOptionId: singleChoice! }];
+        selections = [{ optionId: singleChoice! }];
       } else if (poll.type === 'MultipleChoice') {
-        selections = multipleChoices.map((id) => ({ pollOptionId: id }));
+        selections = multipleChoices.map((id) => ({ optionId: id }));
       } else {
         selections = ranking.map((id, index) => ({
-          pollOptionId: id,
+          optionId: id,
           rank: index + 1,
         }));
       }
