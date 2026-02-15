@@ -1,32 +1,25 @@
-language_server:
-  # C# backend
-  - language_id: csharp
-    command: OmniSharp
-    args:
-      - "-lsp"
-      - "--source"
-      - "src/backend"
-    extensions:
-      - ".cs"
+languages:
+- csharp
+- typescript
 
-  # TypeScript/JavaScript frontend
-  - language_id: typescript
-    command: typescript-language-server
-    args:
-      - "--stdio"
-    extensions:
-      - ".ts"
-      - ".tsx"
-      - ".js"
-      - ".jsx"
+encoding: "utf-8"
 
-project_root: "."
+ignore_all_files_in_gitignore: true
 
-ignore_patterns:
-  - "node_modules"
-  - ".next"
-  - "bin"
-  - "obj"
-  - ".git"
-  - "coverage"
-  - ".docker-data"
+ignored_paths: []
+
+read_only: false
+
+excluded_tools: []
+
+initial_prompt: ""
+
+project_name: "exovote"
+
+included_optional_tools: []
+
+base_modes:
+
+default_modes:
+
+fixed_tools: []
