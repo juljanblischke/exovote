@@ -4,6 +4,7 @@ services:
     image: traefik:3
     restart: unless-stopped
     command:
+      - "--log.level=INFO"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=exovote"
@@ -178,4 +179,5 @@ volumes:
 
 networks:
   exovote:
+    name: exovote
     driver: bridge

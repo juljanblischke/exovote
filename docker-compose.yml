@@ -113,4 +113,5 @@ volumes:
 
 networks:
   exovote:
+    name: exovote
     driver: bridge
