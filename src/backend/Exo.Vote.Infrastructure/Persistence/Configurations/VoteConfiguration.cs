@@ -28,6 +28,14 @@ public class VoteConfiguration : IEntityTypeConfiguration<VoteEntity>
             .HasMaxLength(256)
             .IsRequired();
 
+        builder.Property(v => v.VoterName)
+            .HasColumnName("voter_name")
+            .HasMaxLength(256)
+            .IsRequired();
+
+        builder.Property(v => v.Rank)
+            .HasColumnName("rank");
+
         builder.Property(v => v.VotedAt)
             .HasColumnName("voted_at");
 
@@ -37,7 +45,7 @@ public class VoteConfiguration : IEntityTypeConfiguration<VoteEntity>
         builder.Property(v => v.UpdatedAt)
             .HasColumnName("updated_at");
 
-        // Unique constraint: one vote per voter per poll (for SingleChoice)
+        // Index for looking up votes by poll and voter
         builder.HasIndex(v => new { v.PollId, v.VoterId })
             .HasDatabaseName("ix_votes_poll_voter");
     }

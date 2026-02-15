@@ -1,3 +1,5 @@
+using Exo.Vote.Api.Services;
+using Exo.Vote.Application.Common.Interfaces;
 using Microsoft.OpenApi.Models;
 
 namespace Exo.Vote.Api.Extensions;
@@ -19,6 +21,14 @@ public static class ServiceCollectionExtensions
                     .AllowCredentials();
             });
         });
+
+        // SignalR
+        services.AddSignalR();
+        services.AddScoped<IVoteNotificationService, VoteNotificationService>();
+
+        // Background jobs
+        services.AddHostedService<PollExpirationService>();
+        services.AddHostedService<PollArchiveService>();
 
         // Health Checks
         services.AddHealthChecks();

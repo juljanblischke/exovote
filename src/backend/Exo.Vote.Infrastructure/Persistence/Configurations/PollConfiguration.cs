@@ -49,6 +49,9 @@ public class PollConfiguration : IEntityTypeConfiguration<PollEntity>
             .HasMaxLength(50)
             .HasDefaultValue(PollType.SingleChoice);
 
+        builder.Property(p => p.LastViewedAt)
+            .HasColumnName("last_viewed_at");
+
         builder.Property(p => p.CreatedAt)
             .HasColumnName("created_at");
 

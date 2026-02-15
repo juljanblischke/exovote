@@ -55,6 +55,12 @@ public class ExceptionMiddleware
                 _logger.LogWarning(exception, "Resource not found");
                 break;
 
+            case InvalidOperationException:
+                statusCode = HttpStatusCode.Conflict;
+                response = ApiResponse.Fail(exception.Message);
+                _logger.LogWarning(exception, "Invalid operation: {Message}", exception.Message);
+                break;
+
             case UnauthorizedAccessException:
                 statusCode = HttpStatusCode.Unauthorized;
                 response = ApiResponse.Fail("Unauthorized access.");

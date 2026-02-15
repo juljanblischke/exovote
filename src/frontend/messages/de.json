@@ -37,5 +37,105 @@
     "accept": "Akzeptieren",
     "decline": "Ablehnen",
     "learnMore": "Mehr erfahren"
+  },
+  "polls": {
+    "create": {
+      "title": "Umfrage erstellen",
+      "titleLabel": "Titel",
+      "titlePlaceholder": "Gib deiner Umfrage einen Titel",
+      "descriptionLabel": "Beschreibung",
+      "descriptionPlaceholder": "Beschreibe, worum es in der Umfrage geht (optional)",
+      "typeLabel": "Umfragetyp",
+      "optionsLabel": "Antwortmoglichkeiten",
+      "optionPlaceholder": "Option {number}",
+      "addOption": "Option hinzufugen",
+      "removeOption": "Option entfernen",
+      "minOptions": "Mindestens {min} Optionen erforderlich",
+      "expirationLabel": "Ablaufdatum",
+      "expirationPlaceholder": "Kein Ablaufdatum",
+      "expirationHelp": "Die Umfrage wird automatisch geschlossen, wenn das Datum erreicht ist",
+      "submitButton": "Umfrage erstellen",
+      "creating": "Wird erstellt...",
+      "success": "Umfrage erfolgreich erstellt!",
+      "shareLinkLabel": "Link zum Teilen",
+      "validation": {
+        "titleRequired": "Ein Titel ist erforderlich",
+        "titleMaxLength": "Der Titel darf maximal {max} Zeichen lang sein",
+        "optionRequired": "Jede Option muss ausgefullt sein",
+        "optionMaxLength": "Optionen durfen maximal {max} Zeichen lang sein",
+        "minOptions": "Mindestens {min} Optionen sind erforderlich",
+        "maxOptions": "Maximal {max} Optionen sind erlaubt",
+        "expirationFuture": "Das Ablaufdatum muss in der Zukunft liegen",
+        "duplicateOption": "Doppelte Optionen sind nicht erlaubt"
+      }
+    },
+    "view": {
+      "createdAt": "Erstellt am {date}",
+      "expiresAt": "Lauft ab am {date}",
+      "noExpiration": "Kein Ablaufdatum",
+      "closedAt": "Geschlossen am {date}",
+      "votingDisabled": "Die Abstimmung ist fur diese Umfrage nicht mehr moglich.",
+      "alreadyVoted": "Du hast bereits abgestimmt."
+    },
+    "vote": {
+      "voterNameLabel": "Dein Name",
+      "voterNamePlaceholder": "Gib deinen Namen ein",
+      "voterNameHelp": "Dein Name wird anderen Teilnehmern angezeigt",
+      "submitVote": "Abstimmen",
+      "submitting": "Wird abgestimmt...",
+      "selectOption": "Wahle eine Option",
+      "selectOptions": "Wahle eine oder mehrere Optionen",
+      "rankOptions": "Ordne die Optionen nach Praferenz",
+      "rankHelp": "Ziehe die Optionen in die gewunschte Reihenfolge (1 = beste Wahl)",
+      "success": "Deine Stimme wurde erfolgreich abgegeben!",
+      "validation": {
+        "nameRequired": "Dein Name ist erforderlich",
+        "selectionRequired": "Bitte wahle mindestens eine Option",
+        "rankingRequired": "Bitte ordne alle Optionen"
+      }
+    },
+    "types": {
+      "singleChoice": "Einzelauswahl",
+      "singleChoiceDescription": "Teilnehmer wahlen genau eine Option",
+      "multipleChoice": "Mehrfachauswahl",
+      "multipleChoiceDescription": "Teilnehmer wahlen eine oder mehrere Optionen",
+      "ranked": "Rangfolge",
+      "rankedDescription": "Teilnehmer ordnen die Optionen nach Praferenz"
+    },
+    "status": {
+      "active": "Aktiv",
+      "closed": "Geschlossen",
+      "archived": "Archiviert",
+      "expired": "Abgelaufen"
+    },
+    "results": {
+      "title": "Ergebnisse",
+      "totalVotes": "{count, plural, =0 {Keine Stimmen} one {1 Stimme} other {# Stimmen}}",
+      "percentage": "{value}%",
+      "noVotes": "Noch keine Stimmen abgegeben",
+      "voterList": "Teilnehmer",
+      "showVoters": "Teilnehmer anzeigen",
+      "hideVoters": "Teilnehmer ausblenden",
+      "averageRank": "Durchschn. Rang: {rank}",
+      "liveUpdates": "Live-Aktualisierung",
+      "connected": "Verbunden",
+      "disconnected": "Getrennt",
+      "reconnecting": "Verbindung wird wiederhergestellt..."
+    },
+    "share": {
+      "title": "Umfrage teilen",
+      "copyLink": "Link kopieren",
+      "copied": "Kopiert!"
+    },
+    "errors": {
+      "notFound": "Umfrage nicht gefunden",
+      "notFoundDescription": "Die angeforderte Umfrage existiert nicht oder wurde entfernt.",
+      "closed": "Diese Umfrage ist geschlossen",
+      "closedDescription": "Es konnen keine weiteren Stimmen abgegeben werden.",
+      "duplicateVote": "Du hast bereits an dieser Umfrage teilgenommen.",
+      "validationFailed": "Bitte uberprufe deine Eingaben.",
+      "serverError": "Ein Fehler ist aufgetreten. Bitte versuche es spater erneut.",
+      "connectionError": "Verbindung zum Server konnte nicht hergestellt werden."
+    }
   }
 }

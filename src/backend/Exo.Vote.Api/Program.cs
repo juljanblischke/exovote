@@ -60,6 +60,8 @@ try
         .WithTags("Root")
         .ExcludeFromDescription();
 
+    app.MapPollEndpoints();
+
     app.Run();
 }
 catch (Exception ex)
