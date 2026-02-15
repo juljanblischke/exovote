@@ -36,11 +36,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=exovote;Username=exovote;Password=exovote_dev
-      - Redis__ConnectionString=redis:6379
-      - RabbitMQ__Host=rabbitmq
-      - RabbitMQ__Port=5672
-      - RabbitMQ__Username=exovote
-      - RabbitMQ__Password=exovote_dev
+      - ConnectionStrings__Redis=redis:6379
+      - ConnectionStrings__RabbitMq=amqp://exovote:exovote_dev@rabbitmq:5672/
     depends_on:
       postgres:
         condition: service_healthy
