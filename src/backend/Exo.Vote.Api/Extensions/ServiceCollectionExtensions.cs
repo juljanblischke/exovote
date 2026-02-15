@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Exo.Vote.Api.Services;
 using Exo.Vote.Application.Common.Interfaces;
 using Microsoft.OpenApi.Models;
@@ -8,6 +10,13 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
+        // JSON serialization
+        services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
+
         // CORS
         var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
