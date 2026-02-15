@@ -54,6 +54,6 @@ describe('VotingForm', () => {
       target: { value: 'Test User' },
     });
     fireEvent.click(screen.getByRole('button', { name: 'Abstimmen' }));
-    expect(screen.getByText('Bitte wahle mindestens eine Option')).toBeInTheDocument();
+    expect(screen.getByText('Bitte wähle mindestens eine Option')).toBeInTheDocument();
   });
 });
