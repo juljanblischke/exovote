@@ -49,7 +49,6 @@ export default function PollPage() {
   };
 
   const canVote = poll?.isActive && poll?.status === 'Active' && !hasVoted;
-  const showResults = hasVoted || !poll?.isActive || poll?.status !== 'Active';
 
   // Loading state
   if (loading) {
@@ -138,10 +137,8 @@ export default function PollPage() {
           </div>
         )}
 
-        {/* Results */}
-        {showResults && (
-          <PollResults pollId={poll.id} pollType={poll.type} />
-        )}
+        {/* Results — always visible */}
+        <PollResults pollId={poll.id} pollType={poll.type} />
       </div>
     </div>
   );

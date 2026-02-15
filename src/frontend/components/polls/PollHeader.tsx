@@ -23,7 +23,7 @@ export function PollHeader({ poll }: PollHeaderProps) {
       <div className="flex items-center gap-3">
         <PollStatusBadge status={poll.status} />
         <span className="text-xs text-[var(--muted-foreground)]">
-          {t('results.totalVotes', { count: poll.totalVotes })}
+          {t('results.totalVotes', { count: poll.options.reduce((sum, o) => sum + o.voteCount, 0) })}
         </span>
       </div>
       <h1 className="text-gradient text-3xl font-bold sm:text-4xl">
