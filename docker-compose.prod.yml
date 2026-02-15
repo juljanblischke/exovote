@@ -81,6 +81,7 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
       - ConnectionStrings__Redis=redis:6379,password=${REDIS_PASSWORD}
       - ConnectionStrings__RabbitMq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/
+      - Cors__AllowedOrigins__0=https://${DOMAIN}
     depends_on:
       postgres:
         condition: service_healthy
