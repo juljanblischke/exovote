@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { Link } from '@/lib/i18n/navigation';
+import { apiFetch, ApiError } from '@/lib/api';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { PollHeader } from '@/components/polls/PollHeader';
@@ -25,18 +26,14 @@ export default function PollPage() {
 
   const fetchPoll = useCallback(async () => {
     try {
-      const res = await fetch(`/api/polls/${pollId}`);
-      if (res.status === 404) {
-        setError('notFound');
-        return;
-      }
-      if (!res.ok) {
-        throw new Error();
-      }
-      const data: Poll = await res.json();
+      const data = await apiFetch<Poll>(`/api/polls/${pollId}`);
       setPoll(data);
-    } catch {
-      setError('serverError');
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 404) {
+        setError('notFound');
+      } else {
+        setError('serverError');
+      }
     } finally {
       setLoading(false);
     }

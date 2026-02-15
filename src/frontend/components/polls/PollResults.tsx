@@ -6,6 +6,7 @@ import { HubConnectionBuilder, HubConnectionState, LogLevel } from '@microsoft/s
 import type { HubConnection } from '@microsoft/signalr';
 import { Wifi, WifiOff, ChevronDown, ChevronUp, Trophy } from 'lucide-react';
 import clsx from 'clsx';
+import { apiFetch } from '@/lib/api';
 import { Card } from '@/components/ui/Card';
 import type { PollType, PollResults as PollResultsType, PollResultOption } from '@/lib/types';
 
@@ -27,11 +28,8 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
 
   const fetchResults = useCallback(async () => {
     try {
-      const res = await fetch(`/api/polls/${pollId}/results`);
-      if (res.ok) {
-        const data: PollResultsType = await res.json();
-        setResults(data);
-      }
+      const data = await apiFetch<PollResultsType>(`/api/polls/${pollId}/results`);
+      setResults(data);
     } catch {
       // Silently fail - will retry via SignalR
     } finally {

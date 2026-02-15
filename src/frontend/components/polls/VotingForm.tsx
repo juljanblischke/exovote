@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
+import { apiFetch, ApiError } from '@/lib/api';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
@@ -82,7 +83,7 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
         }));
       }
 
-      const res = await fetch(`/api/polls/${poll.id}/votes`, {
+      await apiFetch(`/api/polls/${poll.id}/votes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -91,17 +92,13 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
         }),
       });
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        if (res.status === 409) {
-          throw new Error(t('errors.duplicateVote'));
-        }
-        throw new Error(body?.message || t('errors.serverError'));
-      }
-
       onVoteSubmitted();
     } catch (err) {
-      setError(err instanceof Error ? err.message : t('errors.serverError'));
+      if (err instanceof ApiError && err.status === 409) {
+        setError(t('errors.duplicateVote'));
+      } else {
+        setError(err instanceof Error ? err.message : t('errors.serverError'));
+      }
     } finally {
       setSubmitting(false);
     }

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/lib/i18n/navigation';
 import { Plus, Trash2, Copy, Check, ArrowLeft } from 'lucide-react';
 import { Link } from '@/lib/i18n/navigation';
+import { apiFetch } from '@/lib/api';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
@@ -110,19 +111,13 @@ export default function CreatePollPage() {
         expiresAt: form.expiresAt ? new Date(form.expiresAt).toISOString() : null,
       };
 
-      const res = await fetch('/api/polls', {
+      const data = await apiFetch<{ pollId: string }>('/api/polls', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        throw new Error(body?.message || t('errors.serverError'));
-      }
-
-      const data = await res.json();
-      setCreatedPollId(data.data?.pollId || data.pollId || data.id);
+      setCreatedPollId(data.pollId);
     } catch (err) {
       setErrors({
         general: err instanceof Error ? err.message : t('errors.serverError'),
