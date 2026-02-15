@@ -122,7 +122,7 @@ export default function CreatePollPage() {
       }
 
       const data = await res.json();
-      setCreatedPollId(data.id);
+      setCreatedPollId(data.data?.pollId || data.pollId || data.id);
     } catch (err) {
       setErrors({
         general: err instanceof Error ? err.message : t('errors.serverError'),
