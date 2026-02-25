@@ -24,9 +24,15 @@
   },
   "home": {
     "hero": {
-      "title": "Abstimmungen leicht gemacht",
-      "subtitle": "Erstelle Umfragen, teile Links und sammle Stimmen in Echtzeit.",
-      "cta": "Umfrage erstellen"
+      "tagline": "Open-Source Abstimmungsplattform",
+      "title": "Abstimmungen",
+      "titleHighlight": "leicht gemacht",
+      "subtitle": "Erstelle Umfragen, teile Links und sammle Stimmen in Echtzeit. Sicher, selbst gehostet und DSGVO-konform.",
+      "cta": "Umfrage erstellen",
+      "ctaSecondary": "Mehr erfahren",
+      "scroll": "Entdecken",
+      "liveResults": "Live-Ergebnisse",
+      "voteCast": "Stimme abgegeben"
     }
   },
   "footer": {

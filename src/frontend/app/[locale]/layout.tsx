@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     'Erstelle Umfragen, teile Links und sammle Stimmen in Echtzeit. ExoVote macht Abstimmungen einfach und sicher.',
   keywords: ['voting', 'polls', 'umfragen', 'abstimmung', 'exovote', 'exostruction'],
   authors: [{ name: 'Exostruction' }],
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'de_DE',
