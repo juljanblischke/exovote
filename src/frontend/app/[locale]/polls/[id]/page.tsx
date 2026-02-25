@@ -53,8 +53,11 @@ export default function PollPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="relative overflow-hidden">
-        <div className="gradient-mesh absolute inset-0 -z-10" />
+      <div className="relative">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(225,29,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(225,29,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black_70%,transparent_110%)]" />
+          <div className="absolute top-20 right-[10%] w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-[100px]" />
+        </div>
         <div className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-4">
           <div className="text-center">
             <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-[var(--primary)] border-t-transparent" />
@@ -68,8 +71,11 @@ export default function PollPage() {
   // Error states
   if (error || !poll) {
     return (
-      <div className="relative overflow-hidden">
-        <div className="gradient-mesh absolute inset-0 -z-10" />
+      <div className="relative">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(225,29,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(225,29,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black_70%,transparent_110%)]" />
+          <div className="absolute top-20 right-[10%] w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-[100px]" />
+        </div>
         <div className="mx-auto flex min-h-[60vh] max-w-lg flex-col items-center justify-center px-4">
           <Card glass className="w-full text-center">
             <AlertCircle className="mx-auto mb-4 h-12 w-12 text-[var(--destructive)]" />

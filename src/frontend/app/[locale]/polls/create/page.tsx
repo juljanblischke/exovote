@@ -160,8 +160,11 @@ export default function CreatePollPage() {
   if (createdPollId) {
     const shareUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/polls/${createdPollId}`;
     return (
-      <div className="relative overflow-hidden">
-        <div className="gradient-mesh absolute inset-0 -z-10" />
+      <div className="relative">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(225,29,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(225,29,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black_70%,transparent_110%)]" />
+          <div className="absolute top-20 right-[10%] w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-[100px]" />
+        </div>
         <div className="mx-auto flex min-h-[70vh] max-w-lg flex-col items-center justify-center px-4 py-12">
           <Card glass className="w-full text-center">
             <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
@@ -212,8 +215,12 @@ export default function CreatePollPage() {
   }
 
   return (
-    <div className="relative overflow-hidden">
-      <div className="gradient-mesh absolute inset-0 -z-10" />
+    <div className="relative">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(225,29,72,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(225,29,72,0.03)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black_70%,transparent_110%)]" />
+        <div className="absolute top-20 right-[10%] w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-40 left-[5%] w-80 h-80 bg-[var(--primary)]/5 rounded-full blur-[120px]" />
+      </div>
       <div className="mx-auto max-w-2xl px-4 py-12">
         {/* Back link */}
         <Link
