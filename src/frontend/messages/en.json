@@ -24,9 +24,15 @@
   },
   "home": {
     "hero": {
-      "title": "Voting Made Easy",
-      "subtitle": "Create polls, share links and collect votes in real-time.",
-      "cta": "Create Poll"
+      "tagline": "Open-Source Voting Platform",
+      "title": "Voting",
+      "titleHighlight": "Made Easy",
+      "subtitle": "Create polls, share links and collect votes in real-time. Secure, self-hosted and GDPR compliant.",
+      "cta": "Create Poll",
+      "ctaSecondary": "Learn More",
+      "scroll": "Discover",
+      "liveResults": "Live Results",
+      "voteCast": "Vote Cast"
     }
   },
   "footer": {
