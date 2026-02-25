@@ -36,7 +36,7 @@ export default function HomePage() {
               <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tight">
                 {t('hero.title')}
               </span>
-              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-gradient mt-2">
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-gradient mt-2 pb-2">
                 {t('hero.titleHighlight')}
               </span>
             </h1>
