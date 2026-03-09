@@ -104,7 +104,7 @@
       "selectOption": "Select an option",
       "selectOptions": "Select one or more options",
       "rankOptions": "Rank the options by preference",
-      "rankHelp": "Drag options into your preferred order (1 = top choice)",
+      "rankHelp": "Drag or use the arrow buttons to reorder options (1 = top choice)",
       "success": "Your vote has been submitted successfully!",
       "validation": {
         "nameRequired": "Your name is required",

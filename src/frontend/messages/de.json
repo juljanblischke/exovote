@@ -104,7 +104,7 @@
       "selectOption": "Wähle eine Option",
       "selectOptions": "Wähle eine oder mehrere Optionen",
       "rankOptions": "Ordne die Optionen nach Präferenz",
-      "rankHelp": "Ziehe die Optionen in die gewünschte Reihenfolge (1 = beste Wahl)",
+      "rankHelp": "Ziehe oder verwende die Pfeiltasten, um die Reihenfolge zu ändern (1 = beste Wahl)",
       "success": "Deine Stimme wurde erfolgreich abgegeben!",
       "validation": {
         "nameRequired": "Dein Name ist erforderlich",

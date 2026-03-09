@@ -72,4 +72,132 @@ public class CastVoteValidatorTests
         var result = _validator.TestValidate(command);
         result.ShouldHaveValidationErrorFor(x => x.Selections);
     }
+
+    [Fact]
+    public void Validate_ValidRankedSelections_ShouldNotHaveErrors()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid(), 2),
+                new(Guid.NewGuid(), 3)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [Fact]
+    public void Validate_RankedWithDuplicateRanks_ShouldHaveError()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid(), 3)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections)
+            .WithErrorMessage("Ranks must be sequential starting at 1 with no duplicates");
+    }
+
+    [Fact]
+    public void Validate_RankedNotStartingAt1_ShouldHaveError()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), 0),
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid(), 2)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections);
+    }
+
+    [Fact]
+    public void Validate_RankedWithGaps_ShouldHaveError()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid(), 3),
+                new(Guid.NewGuid(), 5)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections);
+    }
+
+    [Fact]
+    public void Validate_RankedMixedNullAndNonNullRanks_ShouldHaveError()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), 1),
+                new(Guid.NewGuid()),
+                new(Guid.NewGuid(), 3)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections);
+    }
+
+    [Fact]
+    public void Validate_DuplicateOptionIds_ShouldHaveError()
+    {
+        var optionId = Guid.NewGuid();
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(optionId, 1),
+                new(optionId, 2)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections)
+            .WithErrorMessage("Duplicate option selections are not allowed");
+    }
+
+    [Fact]
+    public void Validate_RankedWithNegativeRank_ShouldHaveError()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>
+            {
+                new(Guid.NewGuid(), -1),
+                new(Guid.NewGuid(), 0),
+                new(Guid.NewGuid(), 1)
+            }
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections);
+    }
 }

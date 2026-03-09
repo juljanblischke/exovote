@@ -23,9 +23,9 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
   const [voterName, setVoterName] = useState('');
   const [singleChoice, setSingleChoice] = useState<string | null>(null);
   const [multipleChoices, setMultipleChoices] = useState<string[]>([]);
-  const [ranking, setRanking] = useState<string[]>(
-    poll.options.map((o) => o.id),
-  );
+  const initialRanking = poll.options.map((o) => o.id);
+  const [ranking, setRanking] = useState<string[]>(initialRanking);
+  const [hasReordered, setHasReordered] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
@@ -56,6 +56,11 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
 
     if (poll.type === 'MultipleChoice' && multipleChoices.length === 0) {
       setSelectionError(t('vote.validation.selectionRequired'));
+      valid = false;
+    }
+
+    if (poll.type === 'Ranked' && !hasReordered) {
+      setSelectionError(t('vote.validation.rankingRequired'));
       valid = false;
     }
 
@@ -159,7 +164,11 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
               <RankedVoting
                 options={poll.options}
                 ranking={ranking}
-                onRankingChange={setRanking}
+                onRankingChange={(newRanking) => {
+                  setRanking(newRanking);
+                  setHasReordered(true);
+                  setSelectionError(null);
+                }}
               />
             </>
           )}
