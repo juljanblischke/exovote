@@ -138,6 +138,7 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
   });
 
   const maxVotes = Math.max(...results.options.map((o) => o.voteCount), 1);
+  const isRanked = pollType === 'Ranked';
 
   return (
     <Card glass>
@@ -184,7 +185,8 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
               pollType={pollType}
               isExpanded={expandedOptions.has(option.id)}
               onToggleVoters={() => toggleVoters(option.id)}
-              isLeader={index === 0 && option.voteCount > 0}
+              isLeader={index === 0 && (isRanked ? option.averageRank != null : option.voteCount > 0)}
+              optionCount={results.options.length}
             />
           ))}
         </div>
@@ -202,6 +204,7 @@ type ResultOptionProps = {
   isExpanded: boolean;
   onToggleVoters: () => void;
   isLeader: boolean;
+  optionCount: number;
 };
 
 function ResultOption({
@@ -212,10 +215,17 @@ function ResultOption({
   isExpanded,
   onToggleVoters,
   isLeader,
+  optionCount,
 }: ResultOptionProps) {
   const t = useTranslations('polls.results');
 
-  const barWidth = totalVotes > 0 ? (option.voteCount / maxVotes) * 100 : 0;
+  const isRanked = pollType === 'Ranked';
+  // For ranked polls, show bar based on inverse average rank (lower rank = better = wider bar)
+  const rankedBarWidth = isRanked && option.averageRank != null && optionCount > 1
+    ? ((optionCount - option.averageRank + 1) / optionCount) * 100
+    : 0;
+  const standardBarWidth = totalVotes > 0 ? (option.voteCount / maxVotes) * 100 : 0;
+  const barWidth = isRanked ? rankedBarWidth : standardBarWidth;
 
   return (
     <div className="space-y-1.5">
@@ -226,15 +236,20 @@ function ResultOption({
           <span className="text-sm font-medium">{option.text}</span>
         </div>
         <div className="flex items-center gap-2 text-xs text-[var(--muted-foreground)]">
-          {pollType === 'Ranked' && option.averageRank != null && (
-            <span>{t('averageRank', { rank: option.averageRank.toFixed(1) })}</span>
+          {isRanked && option.averageRank != null ? (
+            <span className="font-semibold tabular-nums">
+              {t('averageRank', { rank: option.averageRank.toFixed(1) })}
+            </span>
+          ) : (
+            <>
+              <span className="font-semibold tabular-nums">
+                {option.voteCount}
+              </span>
+              <span>
+                ({t('percentage', { value: totalVotes > 0 ? Math.round((option.voteCount / totalVotes) * 100) : 0 })})
+              </span>
+            </>
           )}
-          <span className="font-semibold tabular-nums">
-            {option.voteCount}
-          </span>
-          <span>
-            ({t('percentage', { value: totalVotes > 0 ? Math.round((option.voteCount / totalVotes) * 100) : 0 })})
-          </span>
         </div>
       </div>
 

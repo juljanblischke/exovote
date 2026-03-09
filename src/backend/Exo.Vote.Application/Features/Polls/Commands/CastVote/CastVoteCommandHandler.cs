@@ -68,6 +68,34 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
             throw new InvalidOperationException("Single choice polls allow only one selection");
         }
 
+        // For Ranked polls, validate all options are ranked with proper sequential ranks
+        if (poll.Type == PollType.Ranked)
+        {
+            if (command.Selections.Count != poll.Options.Count)
+            {
+                throw new InvalidOperationException("All options must be ranked in a ranked poll");
+            }
+
+            if (command.Selections.Any(s => !s.Rank.HasValue))
+            {
+                throw new InvalidOperationException("All selections must include a rank for ranked polls");
+            }
+
+            var ranks = command.Selections.Select(s => s.Rank!.Value).OrderBy(r => r).ToList();
+            if (ranks.First() != 1 || ranks.Last() != poll.Options.Count)
+            {
+                throw new InvalidOperationException("Ranks must be sequential starting at 1");
+            }
+
+            for (int i = 0; i < ranks.Count; i++)
+            {
+                if (ranks[i] != i + 1)
+                {
+                    throw new InvalidOperationException("Ranks must be sequential with no gaps or duplicates");
+                }
+            }
+        }
+
         // Create vote records
         var voterId = Guid.NewGuid().ToString();
         foreach (var selection in command.Selections)

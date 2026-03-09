@@ -56,4 +56,50 @@ describe('VotingForm', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Abstimmen' }));
     expect(screen.getByText('Bitte wähle mindestens eine Option')).toBeInTheDocument();
   });
+
+  it('shows validation error when submitting ranked poll without reordering', () => {
+    const rankedPoll: Poll = {
+      ...basePoll,
+      type: 'Ranked',
+      options: [
+        { id: '1', text: 'Option A', sortOrder: 0, voteCount: 0 },
+        { id: '2', text: 'Option B', sortOrder: 1, voteCount: 0 },
+        { id: '3', text: 'Option C', sortOrder: 2, voteCount: 0 },
+      ],
+    };
+    render(<VotingForm poll={rankedPoll} onVoteSubmitted={vi.fn()} />);
+    // Fill in name but don't reorder
+    fireEvent.change(screen.getByPlaceholderText('Gib deinen Namen ein'), {
+      target: { value: 'Test User' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Abstimmen' }));
+    expect(screen.getByText('Bitte ordne alle Optionen')).toBeInTheDocument();
+  });
+
+  it('clears ranked validation error after reordering', () => {
+    const rankedPoll: Poll = {
+      ...basePoll,
+      type: 'Ranked',
+      options: [
+        { id: '1', text: 'Option A', sortOrder: 0, voteCount: 0 },
+        { id: '2', text: 'Option B', sortOrder: 1, voteCount: 0 },
+        { id: '3', text: 'Option C', sortOrder: 2, voteCount: 0 },
+      ],
+    };
+    render(<VotingForm poll={rankedPoll} onVoteSubmitted={vi.fn()} />);
+    // Fill in name
+    fireEvent.change(screen.getByPlaceholderText('Gib deinen Namen ein'), {
+      target: { value: 'Test User' },
+    });
+    // Submit without reordering
+    fireEvent.click(screen.getByRole('button', { name: 'Abstimmen' }));
+    expect(screen.getByText('Bitte ordne alle Optionen')).toBeInTheDocument();
+
+    // Reorder by clicking move down on first item
+    const moveDownButtons = screen.getAllByRole('button', { name: 'Move down' });
+    fireEvent.click(moveDownButtons[0]);
+
+    // Validation error should be cleared
+    expect(screen.queryByText('Bitte ordne alle Optionen')).not.toBeInTheDocument();
+  });
 });

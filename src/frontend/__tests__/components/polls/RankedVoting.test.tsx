@@ -58,4 +58,20 @@ describe('RankedVoting', () => {
     const moveDownButtons = screen.getAllByRole('button', { name: 'Move down' });
     expect(moveDownButtons[2]).toBeDisabled();
   });
+
+  it('renders drag handles for each option', () => {
+    render(
+      <RankedVoting options={mockOptions} ranking={['1', '2', '3']} onRankingChange={vi.fn()} />,
+    );
+    const dragHandles = screen.getAllByRole('button', { name: 'Drag to reorder' });
+    expect(dragHandles).toHaveLength(3);
+  });
+
+  it('renders as a list with proper role', () => {
+    render(
+      <RankedVoting options={mockOptions} ranking={['1', '2', '3']} onRankingChange={vi.fn()} />,
+    );
+    expect(screen.getByRole('list', { name: 'Ranked options' })).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+  });
 });
