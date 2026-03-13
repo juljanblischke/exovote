@@ -13,11 +13,12 @@ import type { PollType, PollResults as PollResultsType, PollResultOption } from 
 type PollResultsProps = {
   pollId: string;
   pollType: PollType;
+  isExpired?: boolean;
 };
 
 type ConnectionStatus = 'connected' | 'disconnected' | 'reconnecting';
 
-export function PollResults({ pollId, pollType }: PollResultsProps) {
+export function PollResults({ pollId, pollType, isExpired }: PollResultsProps) {
   const t = useTranslations('polls.results');
 
   const [results, setResults] = useState<PollResultsType | null>(null);
@@ -157,6 +158,16 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
             )}
             {connectionStatusConfig[connectionStatus].label}
           </span>
+          {isExpired !== undefined && (
+            <span className={clsx(
+              'rounded-full px-2 py-0.5 text-xs font-medium',
+              isExpired
+                ? 'bg-[var(--destructive)]/10 text-[var(--destructive)]'
+                : 'bg-green-500/10 text-green-500',
+            )}>
+              {isExpired ? t('pollExpired') : t('pollActive')}
+            </span>
+          )}
         </div>
       </div>
 

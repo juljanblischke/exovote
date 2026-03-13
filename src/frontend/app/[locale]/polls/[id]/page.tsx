@@ -12,6 +12,7 @@ import { VotingForm } from '@/components/polls/VotingForm';
 import { ShareButton } from '@/components/polls/ShareButton';
 import { QrCodeCard } from '@/components/polls/QrCodeCard';
 import { PollResults } from '@/components/polls/PollResults';
+import { CountdownTimer } from '@/components/polls/CountdownTimer';
 import type { Poll } from '@/lib/types';
 
 export default function PollPage() {
@@ -24,6 +25,7 @@ export default function PollPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasVoted, setHasVoted] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
 
   const fetchPoll = useCallback(async () => {
     try {
@@ -44,12 +46,22 @@ export default function PollPage() {
     fetchPoll();
   }, [fetchPoll]);
 
+  useEffect(() => {
+    if (poll?.expiresAt) {
+      setIsExpired(new Date(poll.expiresAt).getTime() <= Date.now());
+    }
+  }, [poll?.expiresAt]);
+
   const handleVoteSubmitted = () => {
     setHasVoted(true);
     fetchPoll();
   };
 
-  const canVote = poll?.isActive && poll?.status === 'Active' && !hasVoted;
+  const handleExpired = () => {
+    setIsExpired(true);
+  };
+
+  const canVote = poll?.isActive && poll?.status === 'Active' && !hasVoted && !isExpired;
 
   // Loading state
   if (loading) {
@@ -119,16 +131,23 @@ export default function PollPage() {
           <ShareButton pollId={poll.id} />
         </div>
 
+        {/* Countdown Timer */}
+        {poll.expiresAt && (
+          <div className="mb-8">
+            <CountdownTimer expiresAt={poll.expiresAt} onExpired={handleExpired} />
+          </div>
+        )}
+
         {/* Share section with QR code */}
         <div className="mb-8">
           <QrCodeCard pollId={poll.id} pollTitle={poll.title} />
         </div>
 
         {/* Voting disabled message */}
-        {!canVote && !hasVoted && poll.status !== 'Active' && (
+        {!canVote && !hasVoted && (poll.status !== 'Active' || isExpired) && (
           <Card glass className="mb-6">
             <p className="text-center text-sm text-[var(--muted-foreground)]">
-              {t('view.votingDisabled')}
+              {isExpired ? t('errors.expired') : t('view.votingDisabled')}
             </p>
           </Card>
         )}
@@ -150,7 +169,7 @@ export default function PollPage() {
         )}
 
         {/* Results — always visible */}
-        <PollResults pollId={poll.id} pollType={poll.type} />
+        <PollResults pollId={poll.id} pollType={poll.type} isExpired={isExpired} />
       </div>
     </div>
   );

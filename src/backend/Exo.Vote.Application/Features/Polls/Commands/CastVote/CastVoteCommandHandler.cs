@@ -43,6 +43,12 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
             throw new InvalidOperationException("Poll is not active");
         }
 
+        // Check if poll has expired
+        if (poll.ExpiresAt.HasValue && poll.ExpiresAt.Value <= DateTime.UtcNow)
+        {
+            throw new InvalidOperationException("Poll has expired");
+        }
+
         // Check for duplicate voter (case-insensitive)
         var existingVote = poll.Votes
             .Any(v => v.VoterName.Equals(command.VoterName, StringComparison.OrdinalIgnoreCase));
