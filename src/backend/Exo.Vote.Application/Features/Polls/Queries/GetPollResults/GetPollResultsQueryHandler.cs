@@ -69,13 +69,25 @@ public sealed class GetPollResultsQueryHandler : IQueryHandler<GetPollResultsQue
             );
         }).ToList();
 
+        var customAnswers = poll.Votes
+            .Where(v => v.CustomAnswerText is not null)
+            .GroupBy(v => new { v.VoterName, v.CustomAnswerText })
+            .Select(g => new CustomAnswerDto(
+                g.Key.CustomAnswerText!,
+                g.Key.VoterName,
+                g.First().VotedAt
+            ))
+            .OrderByDescending(c => c.VotedAt)
+            .ToList();
+
         var response = new GetPollResultsResponse(
             poll.Id,
             poll.Title,
             poll.Type,
             poll.Status,
             totalVoters,
-            options
+            options,
+            customAnswers
         );
 
         await _cache.SetAsync(cacheKey, response, TimeSpan.FromMinutes(2), cancellationToken);

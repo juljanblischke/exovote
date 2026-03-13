@@ -200,4 +200,48 @@ public class CastVoteValidatorTests
         var result = _validator.TestValidate(command);
         result.ShouldHaveValidationErrorFor(x => x.Selections);
     }
+
+    [Fact]
+    public void CustomAnswerText_ShouldFail_WhenExceeds200Characters()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection> { new(Guid.NewGuid()) },
+            CustomAnswerText: new string('x', 201)
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.CustomAnswerText)
+            .WithErrorMessage("Custom answer must not exceed 200 characters");
+    }
+
+    [Fact]
+    public void Selections_ShouldBeAllowedEmpty_WhenCustomAnswerTextProvided()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>(),
+            CustomAnswerText: "My custom answer"
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldNotHaveValidationErrorFor(x => x.Selections);
+    }
+
+    [Fact]
+    public void Selections_ShouldBeRequired_WhenNoCustomAnswerText()
+    {
+        var command = new CastVoteCommand(
+            PollId: Guid.NewGuid(),
+            VoterName: "Alice",
+            Selections: new List<VoteSelection>(),
+            CustomAnswerText: null
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.Selections)
+            .WithErrorMessage("At least one selection is required");
+    }
 }

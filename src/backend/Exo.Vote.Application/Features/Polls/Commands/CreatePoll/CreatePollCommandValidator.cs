@@ -1,3 +1,4 @@
+using Exo.Vote.Domain.Enums;
 using FluentValidation;
 
 namespace Exo.Vote.Application.Features.Polls.Commands.CreatePoll;
@@ -25,5 +26,9 @@ public sealed class CreatePollCommandValidator : AbstractValidator<CreatePollCom
 
         RuleFor(x => x.Type)
             .IsInEnum().WithMessage("Invalid poll type");
+
+        RuleFor(x => x.AllowCustomAnswers)
+            .Must((command, allowCustom) => !allowCustom || command.Type != PollType.Ranked)
+            .WithMessage("Custom answers are not supported for ranked polls");
     }
 }

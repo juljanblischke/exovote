@@ -25,7 +25,8 @@ public sealed class CreatePollCommandHandler : ICommandHandler<CreatePollCommand
             Status = PollStatus.Active,
             IsActive = true,
             Type = command.Type,
-            ExpiresAt = command.ExpiresAt
+            ExpiresAt = command.ExpiresAt,
+            AllowCustomAnswers = command.AllowCustomAnswers
         };
 
         for (var i = 0; i < command.Options.Count; i++)

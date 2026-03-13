@@ -12,6 +12,7 @@ public sealed record GetPollByIdResponse(
     PollStatus Status,
     PollType Type,
     bool IsActive,
+    bool AllowCustomAnswers,
     DateTime? ExpiresAt,
     DateTime CreatedAt,
     IList<PollOptionDto> Options,

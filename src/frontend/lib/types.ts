@@ -16,6 +16,7 @@ export type Poll = {
   status: PollStatus;
   type: PollType;
   isActive: boolean;
+  allowCustomAnswers: boolean;
   expiresAt: string | null;
   createdAt: string;
   options: PollOption[];
@@ -32,8 +33,15 @@ export type PollResultOption = {
   averageRank?: number | null;
 };
 
+export type CustomAnswer = {
+  text: string;
+  voterName: string;
+  votedAt: string;
+};
+
 export type PollResults = {
   pollId: string;
   totalVoters: number;
   options: PollResultOption[];
+  customAnswers: CustomAnswer[];
 };

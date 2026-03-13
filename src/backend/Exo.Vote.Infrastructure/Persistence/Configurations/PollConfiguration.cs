@@ -49,6 +49,10 @@ public class PollConfiguration : IEntityTypeConfiguration<PollEntity>
             .HasMaxLength(50)
             .HasDefaultValue(PollType.SingleChoice);
 
+        builder.Property(p => p.AllowCustomAnswers)
+            .HasColumnName("allow_custom_answers")
+            .HasDefaultValue(false);
+
         builder.Property(p => p.LastViewedAt)
             .HasColumnName("last_viewed_at");
 

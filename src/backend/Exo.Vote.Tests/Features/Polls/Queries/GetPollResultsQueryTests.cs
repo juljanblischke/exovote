@@ -169,4 +169,56 @@ public class GetPollResultsQueryTests
         var act = () => handler.Handle(query, CancellationToken.None).AsTask();
         await act.Should().ThrowAsync<KeyNotFoundException>();
     }
+
+    [Fact]
+    public async Task Handle_PollWithCustomAnswers_ReturnsAggregatedCustomAnswers()
+    {
+        // Arrange
+        using var context = TestDbContextFactory.Create();
+
+        var optionA = new PollOptionEntity { Text = "Option A", SortOrder = 0 };
+        var optionB = new PollOptionEntity { Text = "Option B", SortOrder = 1 };
+
+        var poll = new PollEntity
+        {
+            Title = "Custom Answer Poll",
+            CreatorId = "test",
+            Status = PollStatus.Active,
+            IsActive = true,
+            Type = PollType.SingleChoice,
+            AllowCustomAnswers = true,
+            Options = new List<PollOptionEntity> { optionA, optionB }
+        };
+
+        context.Polls.Add(poll);
+        await context.SaveChangesAsync();
+
+        var now = DateTime.UtcNow;
+
+        // Add a normal vote and two votes with custom answers
+        context.Votes.AddRange(
+            new VoteEntity { PollId = poll.Id, PollOptionId = optionA.Id, VoterId = "v1", VoterName = "Alice", VotedAt = now.AddMinutes(-2) },
+            new VoteEntity { PollId = poll.Id, PollOptionId = optionA.Id, VoterId = "v2", VoterName = "Bob", CustomAnswerText = "My custom idea", VotedAt = now.AddMinutes(-1) },
+            new VoteEntity { PollId = poll.Id, PollOptionId = optionB.Id, VoterId = "v3", VoterName = "Charlie", CustomAnswerText = "Another suggestion", VotedAt = now }
+        );
+        await context.SaveChangesAsync();
+
+        _cache.GetAsync<GetPollResultsResponse>(Arg.Any<string>(), Arg.Any<CancellationToken>())
+            .Returns((GetPollResultsResponse?)null);
+
+        var handler = new GetPollResultsQueryHandler(context, _cache);
+        var query = new GetPollResultsQuery(poll.Id);
+
+        // Act
+        var result = await handler.Handle(query, CancellationToken.None);
+
+        // Assert
+        result.CustomAnswers.Should().HaveCount(2);
+        result.CustomAnswers.Should().Contain(c => c.Text == "My custom idea" && c.VoterName == "Bob");
+        result.CustomAnswers.Should().Contain(c => c.Text == "Another suggestion" && c.VoterName == "Charlie");
+
+        // Custom answers should be ordered by most recent first
+        result.CustomAnswers[0].Text.Should().Be("Another suggestion");
+        result.CustomAnswers[1].Text.Should().Be("My custom idea");
+    }
 }

@@ -68,6 +68,19 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
             throw new InvalidOperationException("Single choice polls allow only one selection");
         }
 
+        // Validate custom answer
+        if (command.CustomAnswerText is not null)
+        {
+            if (!poll.AllowCustomAnswers)
+            {
+                throw new InvalidOperationException("This poll does not allow custom answers");
+            }
+            if (poll.Type == PollType.Ranked)
+            {
+                throw new InvalidOperationException("Custom answers are not supported for ranked polls");
+            }
+        }
+
         // For Ranked polls, validate all options are ranked with proper sequential ranks
         if (poll.Type == PollType.Ranked)
         {
@@ -96,17 +109,43 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
             }
         }
 
+        // Require at least one selection or a custom answer
+        if (command.Selections.Count == 0 && command.CustomAnswerText is null)
+        {
+            throw new InvalidOperationException("At least one selection or a custom answer is required");
+        }
+
         // Create vote records
         var voterId = Guid.NewGuid().ToString();
-        foreach (var selection in command.Selections)
+        if (command.Selections.Count > 0)
         {
+            foreach (var selection in command.Selections)
+            {
+                var vote = new VoteEntity
+                {
+                    PollId = command.PollId,
+                    PollOptionId = selection.OptionId,
+                    VoterId = voterId,
+                    VoterName = command.VoterName,
+                    Rank = selection.Rank,
+                    CustomAnswerText = command.CustomAnswerText,
+                    VotedAt = DateTime.UtcNow
+                };
+
+                _context.Votes.Add(vote);
+            }
+        }
+        else if (command.CustomAnswerText is not null)
+        {
+            // Custom answer only (no predefined option selected)
+            // Use the first poll option as a reference to maintain FK integrity
             var vote = new VoteEntity
             {
                 PollId = command.PollId,
-                PollOptionId = selection.OptionId,
+                PollOptionId = poll.Options.First().Id,
                 VoterId = voterId,
                 VoterName = command.VoterName,
-                Rank = selection.Rank,
+                CustomAnswerText = command.CustomAnswerText,
                 VotedAt = DateTime.UtcNow
             };
 
