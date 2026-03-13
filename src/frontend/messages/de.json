@@ -90,6 +90,14 @@
         "duplicateOption": "Doppelte Optionen sind nicht erlaubt"
       }
     },
+    "countdown": {
+      "timeRemaining": "Verbleibende Zeit",
+      "days": "Tage",
+      "hours": "Std",
+      "minutes": "Min",
+      "seconds": "Sek",
+      "expired": "Diese Umfrage ist abgelaufen"
+    },
     "view": {
       "createdAt": "Erstellt am {date}",
       "expiresAt": "Läuft ab am {date}",
@@ -148,7 +156,9 @@
       "disconnected": "Getrennt",
       "reconnecting": "Verbindung wird wiederhergestellt...",
       "customAnswers": "Eigene Antworten",
-      "noCustomAnswers": "Noch keine eigenen Antworten"
+      "noCustomAnswers": "Noch keine eigenen Antworten",
+      "pollActive": "Aktiv",
+      "pollExpired": "Abgelaufen"
     },
     "share": {
       "title": "Umfrage teilen",
@@ -168,7 +178,8 @@
       "duplicateVote": "Du hast bereits an dieser Umfrage teilgenommen.",
       "validationFailed": "Bitte überprüfe deine Eingaben.",
       "serverError": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
-      "connectionError": "Verbindung zum Server konnte nicht hergestellt werden."
+      "connectionError": "Verbindung zum Server konnte nicht hergestellt werden.",
+      "expired": "Diese Umfrage ist abgelaufen. Es können keine weiteren Stimmen abgegeben werden."
     }
   }
 }

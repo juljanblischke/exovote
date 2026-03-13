@@ -90,6 +90,14 @@
         "duplicateOption": "Duplicate options are not allowed"
       }
     },
+    "countdown": {
+      "timeRemaining": "Time remaining",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Min",
+      "seconds": "Sec",
+      "expired": "This poll has expired"
+    },
     "view": {
       "createdAt": "Created on {date}",
       "expiresAt": "Expires on {date}",
@@ -148,7 +156,9 @@
       "disconnected": "Disconnected",
       "reconnecting": "Reconnecting...",
       "customAnswers": "Custom Answers",
-      "noCustomAnswers": "No custom answers yet"
+      "noCustomAnswers": "No custom answers yet",
+      "pollActive": "Active",
+      "pollExpired": "Expired"
     },
     "share": {
       "title": "Share Poll",
@@ -168,7 +178,8 @@
       "duplicateVote": "You have already participated in this poll.",
       "validationFailed": "Please check your inputs.",
       "serverError": "An error occurred. Please try again later.",
-      "connectionError": "Could not connect to the server."
+      "connectionError": "Could not connect to the server.",
+      "expired": "This poll has expired. No more votes can be submitted."
     }
   }
 }
