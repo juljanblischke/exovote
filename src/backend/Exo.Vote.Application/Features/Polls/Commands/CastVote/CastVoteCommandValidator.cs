@@ -15,7 +15,8 @@ public sealed class CastVoteCommandValidator : AbstractValidator<CastVoteCommand
 
         RuleFor(x => x.Selections)
             .NotNull().WithMessage("Selections are required")
-            .Must(s => s.Count >= 1).WithMessage("At least one selection is required");
+            .Must(s => s.Count >= 1).WithMessage("At least one selection is required")
+            .When(x => x.CustomAnswerText is null);
 
         RuleForEach(x => x.Selections)
             .ChildRules(selection =>
@@ -59,5 +60,9 @@ public sealed class CastVoteCommandValidator : AbstractValidator<CastVoteCommand
             .Must(selections => selections.Select(s => s.OptionId).Distinct().Count() == selections.Count)
             .WithMessage("Duplicate option selections are not allowed")
             .When(x => x.Selections != null && x.Selections.Count > 0);
+
+        RuleFor(x => x.CustomAnswerText)
+            .MaximumLength(200).WithMessage("Custom answer must not exceed 200 characters")
+            .When(x => x.CustomAnswerText is not null);
     }
 }

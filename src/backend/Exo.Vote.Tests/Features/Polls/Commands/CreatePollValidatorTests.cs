@@ -129,4 +129,53 @@ public class CreatePollValidatorTests
         var result = _validator.TestValidate(command);
         result.ShouldHaveAnyValidationError();
     }
+
+    [Fact]
+    public void AllowCustomAnswers_ShouldFail_WhenTypeIsRanked()
+    {
+        var command = new CreatePollCommand(
+            Title: "Test",
+            Description: null,
+            Type: PollType.Ranked,
+            Options: new List<string> { "A", "B" },
+            ExpiresAt: null,
+            AllowCustomAnswers: true
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(x => x.AllowCustomAnswers)
+            .WithErrorMessage("Custom answers are not supported for ranked polls");
+    }
+
+    [Fact]
+    public void AllowCustomAnswers_ShouldSucceed_WhenTypeIsSingleChoice()
+    {
+        var command = new CreatePollCommand(
+            Title: "Test",
+            Description: null,
+            Type: PollType.SingleChoice,
+            Options: new List<string> { "A", "B" },
+            ExpiresAt: null,
+            AllowCustomAnswers: true
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldNotHaveValidationErrorFor(x => x.AllowCustomAnswers);
+    }
+
+    [Fact]
+    public void AllowCustomAnswers_ShouldSucceed_WhenTypeIsMultipleChoice()
+    {
+        var command = new CreatePollCommand(
+            Title: "Test",
+            Description: null,
+            Type: PollType.MultipleChoice,
+            Options: new List<string> { "A", "B" },
+            ExpiresAt: null,
+            AllowCustomAnswers: true
+        );
+
+        var result = _validator.TestValidate(command);
+        result.ShouldNotHaveValidationErrorFor(x => x.AllowCustomAnswers);
+    }
 }

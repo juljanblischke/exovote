@@ -36,6 +36,10 @@ public class VoteConfiguration : IEntityTypeConfiguration<VoteEntity>
         builder.Property(v => v.Rank)
             .HasColumnName("rank");
 
+        builder.Property(v => v.CustomAnswerText)
+            .HasColumnName("custom_answer_text")
+            .HasMaxLength(200);
+
         builder.Property(v => v.VotedAt)
             .HasColumnName("voted_at");
 

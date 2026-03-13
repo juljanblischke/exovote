@@ -72,6 +72,9 @@
       "expirationLabel": "Expiration Date",
       "expirationPlaceholder": "No expiration",
       "expirationHelp": "The poll will automatically close when this date is reached",
+      "allowCustomAnswers": "Allow custom answers",
+      "allowCustomAnswersHelp": "Voters can add their own answer in addition to the predefined options",
+      "customAnswersDisabledForRanked": "Custom answers are not available for ranked polls",
       "submitButton": "Create Poll",
       "creating": "Creating...",
       "success": "Poll created successfully!",
@@ -105,11 +108,16 @@
       "selectOptions": "Select one or more options",
       "rankOptions": "Rank the options by preference",
       "rankHelp": "Drag or use the arrow buttons to reorder options (1 = top choice)",
+      "otherOption": "Other",
+      "customAnswerPlaceholder": "Enter your answer...",
+      "customAnswerHelp": "You can add your own answer (max 200 characters)",
       "success": "Your vote has been submitted successfully!",
       "validation": {
         "nameRequired": "Your name is required",
         "selectionRequired": "Please select at least one option",
-        "rankingRequired": "Please rank all options"
+        "rankingRequired": "Please rank all options",
+        "customAnswerTooLong": "Custom answer must be 200 characters or less",
+        "customAnswerRequired": "Please enter your custom answer"
       }
     },
     "types": {
@@ -138,7 +146,9 @@
       "liveUpdates": "Live updates",
       "connected": "Connected",
       "disconnected": "Disconnected",
-      "reconnecting": "Reconnecting..."
+      "reconnecting": "Reconnecting...",
+      "customAnswers": "Custom Answers",
+      "noCustomAnswers": "No custom answers yet"
     },
     "share": {
       "title": "Share Poll",

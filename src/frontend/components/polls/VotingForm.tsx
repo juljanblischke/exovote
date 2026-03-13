@@ -26,6 +26,8 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
   const initialRanking = poll.options.map((o) => o.id);
   const [ranking, setRanking] = useState<string[]>(initialRanking);
   const [hasReordered, setHasReordered] = useState(false);
+  const [customAnswerSelected, setCustomAnswerSelected] = useState(false);
+  const [customAnswerText, setCustomAnswerText] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string | null>(null);
@@ -49,18 +51,37 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
       valid = false;
     }
 
-    if (poll.type === 'SingleChoice' && !singleChoice) {
-      setSelectionError(t('vote.validation.selectionRequired'));
-      valid = false;
+    const hasCustomAnswer = poll.allowCustomAnswers && customAnswerSelected;
+
+    if (poll.type === 'SingleChoice') {
+      if (!singleChoice && !hasCustomAnswer) {
+        setSelectionError(t('vote.validation.selectionRequired'));
+        valid = false;
+      }
+      if (hasCustomAnswer && !customAnswerText.trim()) {
+        setSelectionError(t('vote.validation.customAnswerRequired'));
+        valid = false;
+      }
     }
 
-    if (poll.type === 'MultipleChoice' && multipleChoices.length === 0) {
-      setSelectionError(t('vote.validation.selectionRequired'));
-      valid = false;
+    if (poll.type === 'MultipleChoice') {
+      if (multipleChoices.length === 0 && !hasCustomAnswer) {
+        setSelectionError(t('vote.validation.selectionRequired'));
+        valid = false;
+      }
+      if (hasCustomAnswer && !customAnswerText.trim()) {
+        setSelectionError(t('vote.validation.customAnswerRequired'));
+        valid = false;
+      }
     }
 
     if (poll.type === 'Ranked' && !hasReordered) {
       setSelectionError(t('vote.validation.rankingRequired'));
+      valid = false;
+    }
+
+    if (hasCustomAnswer && customAnswerText.length > 200) {
+      setSelectionError(t('vote.validation.customAnswerTooLong'));
       valid = false;
     }
 
@@ -78,7 +99,7 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
       let selections: Array<{ optionId: string; rank?: number }>;
 
       if (poll.type === 'SingleChoice') {
-        selections = [{ optionId: singleChoice! }];
+        selections = singleChoice ? [{ optionId: singleChoice }] : [];
       } else if (poll.type === 'MultipleChoice') {
         selections = multipleChoices.map((id) => ({ optionId: id }));
       } else {
@@ -94,6 +115,9 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
         body: JSON.stringify({
           voterName: voterName.trim(),
           selections,
+          customAnswerText: (poll.allowCustomAnswers && customAnswerSelected && customAnswerText.trim())
+            ? customAnswerText.trim()
+            : null,
         }),
       });
 
@@ -143,8 +167,21 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
           {poll.type === 'SingleChoice' && (
             <SingleChoiceVoting
               options={poll.options}
-              selected={singleChoice}
-              onSelect={setSingleChoice}
+              selected={customAnswerSelected ? null : singleChoice}
+              onSelect={(id) => {
+                setSingleChoice(id);
+                setCustomAnswerSelected(false);
+              }}
+              allowCustomAnswer={poll.allowCustomAnswers}
+              customAnswerSelected={customAnswerSelected}
+              onCustomAnswerSelect={() => {
+                setCustomAnswerSelected(true);
+                setSingleChoice(null);
+              }}
+              customAnswerText={customAnswerText}
+              onCustomAnswerTextChange={setCustomAnswerText}
+              customAnswerLabel={t('vote.otherOption')}
+              customAnswerPlaceholder={t('vote.customAnswerPlaceholder')}
             />
           )}
 
@@ -153,6 +190,13 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
               options={poll.options}
               selected={multipleChoices}
               onToggle={toggleMultipleChoice}
+              allowCustomAnswer={poll.allowCustomAnswers}
+              customAnswerSelected={customAnswerSelected}
+              onCustomAnswerToggle={() => setCustomAnswerSelected((prev) => !prev)}
+              customAnswerText={customAnswerText}
+              onCustomAnswerTextChange={setCustomAnswerText}
+              customAnswerLabel={t('vote.otherOption')}
+              customAnswerPlaceholder={t('vote.customAnswerPlaceholder')}
             />
           )}
 
@@ -173,6 +217,11 @@ export function VotingForm({ poll, onVoteSubmitted }: VotingFormProps) {
             </>
           )}
         </FormField>
+        {poll.allowCustomAnswers && poll.type !== 'Ranked' && (
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+            {t('vote.customAnswerHelp')}
+          </p>
+        )}
       </Card>
 
       {error && (

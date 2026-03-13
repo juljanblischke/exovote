@@ -44,6 +44,7 @@ public sealed class GetPollByIdQueryHandler : IQueryHandler<GetPollByIdQuery, Ge
             poll.Status,
             poll.Type,
             poll.IsActive,
+            poll.AllowCustomAnswers,
             poll.ExpiresAt,
             poll.CreatedAt,
             poll.Options.Select(o => new PollOptionDto(

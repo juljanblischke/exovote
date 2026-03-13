@@ -46,4 +46,61 @@ describe('SingleChoiceVoting', () => {
     expect(radios[1].checked).toBe(true);
     expect(radios[2].checked).toBe(false);
   });
+
+  it('renders "Other" option when allowCustomAnswer is true', () => {
+    render(
+      <SingleChoiceVoting
+        options={mockOptions}
+        selected={null}
+        onSelect={vi.fn()}
+        allowCustomAnswer={true}
+        customAnswerLabel="Other"
+        onCustomAnswerSelect={vi.fn()}
+      />,
+    );
+    const radios = screen.getAllByRole('radio');
+    expect(radios).toHaveLength(4);
+    expect(screen.getByText('Other')).toBeInTheDocument();
+  });
+
+  it('shows text input when custom answer is selected', () => {
+    render(
+      <SingleChoiceVoting
+        options={mockOptions}
+        selected={null}
+        onSelect={vi.fn()}
+        allowCustomAnswer={true}
+        customAnswerSelected={true}
+        customAnswerLabel="Other"
+        customAnswerText=""
+        customAnswerPlaceholder="Enter your answer"
+        onCustomAnswerSelect={vi.fn()}
+        onCustomAnswerTextChange={vi.fn()}
+      />,
+    );
+    expect(screen.getByPlaceholderText('Enter your answer')).toBeInTheDocument();
+  });
+
+  it('does not render "Other" option when allowCustomAnswer is false', () => {
+    render(
+      <SingleChoiceVoting
+        options={mockOptions}
+        selected={null}
+        onSelect={vi.fn()}
+        allowCustomAnswer={false}
+      />,
+    );
+    const radios = screen.getAllByRole('radio');
+    expect(radios).toHaveLength(3);
+    expect(screen.queryByText('Other')).not.toBeInTheDocument();
+  });
+
+  it('does not render "Other" option when allowCustomAnswer is undefined', () => {
+    render(
+      <SingleChoiceVoting options={mockOptions} selected={null} onSelect={vi.fn()} />,
+    );
+    const radios = screen.getAllByRole('radio');
+    expect(radios).toHaveLength(3);
+    expect(screen.queryByText('Other')).not.toBeInTheDocument();
+  });
 });

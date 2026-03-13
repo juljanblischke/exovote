@@ -11,7 +11,14 @@ public sealed record GetPollResultsResponse(
     PollType Type,
     PollStatus Status,
     int TotalVoters,
-    IList<OptionResultDto> Options
+    IList<OptionResultDto> Options,
+    IList<CustomAnswerDto> CustomAnswers
+);
+
+public sealed record CustomAnswerDto(
+    string Text,
+    string VoterName,
+    DateTime VotedAt
 );
 
 public sealed record OptionResultDto(

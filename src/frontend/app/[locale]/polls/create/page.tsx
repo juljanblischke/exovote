@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/lib/i18n/navigation';
+import clsx from 'clsx';
 import { Plus, Trash2, Copy, Check, ArrowLeft } from 'lucide-react';
 import { Link } from '@/lib/i18n/navigation';
 import { apiFetch } from '@/lib/api';
@@ -21,6 +22,7 @@ type FormState = {
   type: PollType;
   options: string[];
   expiresAt: string;
+  allowCustomAnswers: boolean;
 };
 
 type FormErrors = {
@@ -46,6 +48,7 @@ export default function CreatePollPage() {
     type: 'SingleChoice',
     options: ['', ''],
     expiresAt: '',
+    allowCustomAnswers: false,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -109,6 +112,7 @@ export default function CreatePollPage() {
         type: form.type,
         options: form.options.filter((o) => o.trim()).map((o) => o.trim()),
         expiresAt: form.expiresAt ? new Date(form.expiresAt).toISOString() : null,
+        allowCustomAnswers: form.allowCustomAnswers,
       };
 
       const data = await apiFetch<{ pollId: string }>('/api/polls', {
@@ -280,7 +284,14 @@ export default function CreatePollPage() {
               <Select
                 id="type"
                 value={form.type}
-                onChange={(e) => setForm((prev) => ({ ...prev, type: e.target.value as PollType }))}
+                onChange={(e) => {
+                  const newType = e.target.value as PollType;
+                  setForm((prev) => ({
+                    ...prev,
+                    type: newType,
+                    allowCustomAnswers: newType === 'Ranked' ? false : prev.allowCustomAnswers,
+                  }));
+                }}
               >
                 <option value="SingleChoice">{t('types.singleChoice')}</option>
                 <option value="MultipleChoice">{t('types.multipleChoice')}</option>
@@ -292,6 +303,52 @@ export default function CreatePollPage() {
                 {form.type === 'Ranked' && t('types.rankedDescription')}
               </p>
             </FormField>
+          </Card>
+
+          {/* Custom Answers Toggle */}
+          <Card glass>
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <label
+                  htmlFor="allowCustomAnswers"
+                  className="text-sm font-semibold"
+                >
+                  {t('create.allowCustomAnswers')}
+                </label>
+                <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">
+                  {form.type === 'Ranked'
+                    ? t('create.customAnswersDisabledForRanked')
+                    : t('create.allowCustomAnswersHelp')}
+                </p>
+              </div>
+              <button
+                id="allowCustomAnswers"
+                type="button"
+                role="switch"
+                aria-checked={form.allowCustomAnswers}
+                disabled={form.type === 'Ranked'}
+                onClick={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    allowCustomAnswers: !prev.allowCustomAnswers,
+                  }))
+                }
+                className={clsx(
+                  'relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors',
+                  form.allowCustomAnswers
+                    ? 'bg-[var(--primary)]'
+                    : 'bg-[var(--muted)]',
+                  form.type === 'Ranked' && 'opacity-50 cursor-not-allowed',
+                )}
+              >
+                <span
+                  className={clsx(
+                    'inline-block h-4 w-4 rounded-full bg-white transition-transform',
+                    form.allowCustomAnswers ? 'translate-x-6' : 'translate-x-1',
+                  )}
+                />
+              </button>
+            </div>
           </Card>
 
           {/* Options */}

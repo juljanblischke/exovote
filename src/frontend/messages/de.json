@@ -72,6 +72,9 @@
       "expirationLabel": "Ablaufdatum",
       "expirationPlaceholder": "Kein Ablaufdatum",
       "expirationHelp": "Die Umfrage wird automatisch geschlossen, wenn das Datum erreicht ist",
+      "allowCustomAnswers": "Eigene Antworten erlauben",
+      "allowCustomAnswersHelp": "Teilnehmer können zusätzlich zu den vorgegebenen Optionen eigene Antworten eingeben",
+      "customAnswersDisabledForRanked": "Eigene Antworten sind für Rangfolge-Umfragen nicht verfügbar",
       "submitButton": "Umfrage erstellen",
       "creating": "Wird erstellt...",
       "success": "Umfrage erfolgreich erstellt!",
@@ -105,11 +108,16 @@
       "selectOptions": "Wähle eine oder mehrere Optionen",
       "rankOptions": "Ordne die Optionen nach Präferenz",
       "rankHelp": "Ziehe oder verwende die Pfeiltasten, um die Reihenfolge zu ändern (1 = beste Wahl)",
+      "otherOption": "Sonstiges",
+      "customAnswerPlaceholder": "Gib deine Antwort ein...",
+      "customAnswerHelp": "Du kannst eine eigene Antwort hinzufügen (max. 200 Zeichen)",
       "success": "Deine Stimme wurde erfolgreich abgegeben!",
       "validation": {
         "nameRequired": "Dein Name ist erforderlich",
         "selectionRequired": "Bitte wähle mindestens eine Option",
-        "rankingRequired": "Bitte ordne alle Optionen"
+        "rankingRequired": "Bitte ordne alle Optionen",
+        "customAnswerTooLong": "Die eigene Antwort darf maximal 200 Zeichen lang sein",
+        "customAnswerRequired": "Bitte gib deine eigene Antwort ein"
       }
     },
     "types": {
@@ -138,7 +146,9 @@
       "liveUpdates": "Live-Aktualisierung",
       "connected": "Verbunden",
       "disconnected": "Getrennt",
-      "reconnecting": "Verbindung wird wiederhergestellt..."
+      "reconnecting": "Verbindung wird wiederhergestellt...",
+      "customAnswers": "Eigene Antworten",
+      "noCustomAnswers": "Noch keine eigenen Antworten"
     },
     "share": {
       "title": "Umfrage teilen",

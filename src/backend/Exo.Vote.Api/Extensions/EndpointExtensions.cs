@@ -31,7 +31,7 @@ public static class EndpointExtensions
 
         polls.MapPost("/{pollId:guid}/votes", async (Guid pollId, CastVoteRequest request, IMediator mediator) =>
         {
-            var command = new CastVoteCommand(pollId, request.VoterName, request.Selections);
+            var command = new CastVoteCommand(pollId, request.VoterName, request.Selections, request.CustomAnswerText);
             var result = await mediator.Send(command);
             return Results.Ok(ApiResponse<CastVoteResponse>.Ok(result));
         })
@@ -53,5 +53,6 @@ public static class EndpointExtensions
 
 public sealed record CastVoteRequest(
     string VoterName,
-    IList<VoteSelection> Selections
+    IList<VoteSelection> Selections,
+    string? CustomAnswerText = null
 );

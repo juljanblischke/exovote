@@ -8,7 +8,8 @@ public sealed record CreatePollCommand(
     string? Description,
     PollType Type,
     IList<string> Options,
-    DateTime? ExpiresAt
+    DateTime? ExpiresAt,
+    bool AllowCustomAnswers = false
 ) : ICommand<CreatePollResponse>;
 
 public sealed record CreatePollResponse(Guid PollId);

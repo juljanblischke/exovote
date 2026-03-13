@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { HubConnectionBuilder, HubConnectionState, LogLevel } from '@microsoft/signalr';
 import type { HubConnection } from '@microsoft/signalr';
-import { Wifi, WifiOff, ChevronDown, ChevronUp, Trophy } from 'lucide-react';
+import { Wifi, WifiOff, ChevronDown, ChevronUp, Trophy, MessageCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { apiFetch } from '@/lib/api';
 import { Card } from '@/components/ui/Card';
@@ -189,6 +189,29 @@ export function PollResults({ pollId, pollType }: PollResultsProps) {
               optionCount={results.options.length}
             />
           ))}
+        </div>
+      )}
+
+      {/* Custom Answers */}
+      {(results.customAnswers ?? []).length > 0 && (
+        <div className="mt-6 border-t border-[var(--border)] pt-4">
+          <div className="mb-3 flex items-center gap-2">
+            <MessageCircle className="h-4 w-4 text-[var(--muted-foreground)]" />
+            <h3 className="text-sm font-semibold">{t('customAnswers')}</h3>
+          </div>
+          <div className="space-y-2">
+            {(results.customAnswers ?? []).map((answer, i) => (
+              <div
+                key={i}
+                className="rounded-lg border border-[var(--border)] bg-[var(--muted)]/30 p-3"
+              >
+                <p className="text-sm">&ldquo;{answer.text}&rdquo;</p>
+                <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+                  — {answer.voterName}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </Card>

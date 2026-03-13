@@ -85,6 +85,7 @@ public class GetPollByIdQueryTests
             PollStatus.Active,
             PollType.SingleChoice,
             true,
+            false,
             null,
             DateTime.UtcNow,
             new List<PollOptionDto>(),

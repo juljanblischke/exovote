@@ -5,7 +5,8 @@ namespace Exo.Vote.Application.Features.Polls.Commands.CastVote;
 public sealed record CastVoteCommand(
     Guid PollId,
     string VoterName,
-    IList<VoteSelection> Selections
+    IList<VoteSelection> Selections,
+    string? CustomAnswerText = null
 ) : ICommand<CastVoteResponse>;
 
 public sealed record VoteSelection(

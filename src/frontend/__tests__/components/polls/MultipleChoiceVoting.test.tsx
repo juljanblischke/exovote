@@ -36,4 +36,61 @@ describe('MultipleChoiceVoting', () => {
     expect(checkboxes[1].checked).toBe(false);
     expect(checkboxes[2].checked).toBe(true);
   });
+
+  it('renders "Other" option when allowCustomAnswer is true', () => {
+    render(
+      <MultipleChoiceVoting
+        options={mockOptions}
+        selected={[]}
+        onToggle={vi.fn()}
+        allowCustomAnswer={true}
+        customAnswerLabel="Other"
+        onCustomAnswerToggle={vi.fn()}
+      />,
+    );
+    const checkboxes = screen.getAllByRole('checkbox');
+    expect(checkboxes).toHaveLength(4);
+    expect(screen.getByText('Other')).toBeInTheDocument();
+  });
+
+  it('shows text input when custom answer is selected', () => {
+    render(
+      <MultipleChoiceVoting
+        options={mockOptions}
+        selected={[]}
+        onToggle={vi.fn()}
+        allowCustomAnswer={true}
+        customAnswerSelected={true}
+        customAnswerLabel="Other"
+        customAnswerText=""
+        customAnswerPlaceholder="Enter your answer"
+        onCustomAnswerToggle={vi.fn()}
+        onCustomAnswerTextChange={vi.fn()}
+      />,
+    );
+    expect(screen.getByPlaceholderText('Enter your answer')).toBeInTheDocument();
+  });
+
+  it('does not render "Other" option when allowCustomAnswer is false', () => {
+    render(
+      <MultipleChoiceVoting
+        options={mockOptions}
+        selected={[]}
+        onToggle={vi.fn()}
+        allowCustomAnswer={false}
+      />,
+    );
+    const checkboxes = screen.getAllByRole('checkbox');
+    expect(checkboxes).toHaveLength(3);
+    expect(screen.queryByText('Other')).not.toBeInTheDocument();
+  });
+
+  it('does not render "Other" option when allowCustomAnswer is undefined', () => {
+    render(
+      <MultipleChoiceVoting options={mockOptions} selected={[]} onToggle={vi.fn()} />,
+    );
+    const checkboxes = screen.getAllByRole('checkbox');
+    expect(checkboxes).toHaveLength(3);
+    expect(screen.queryByText('Other')).not.toBeInTheDocument();
+  });
 });
