@@ -143,7 +143,12 @@
     "share": {
       "title": "Umfrage teilen",
       "copyLink": "Link kopieren",
-      "copied": "Kopiert!"
+      "copied": "Kopiert!",
+      "qrCode": "QR-Code",
+      "qrCodeAlt": "QR-Code für Umfrage: {title}",
+      "downloadPng": "PNG herunterladen",
+      "downloadSvg": "SVG herunterladen",
+      "scanToVote": "Scannen zum Abstimmen"
     },
     "errors": {
       "notFound": "Umfrage nicht gefunden",

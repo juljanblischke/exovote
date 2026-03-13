@@ -10,6 +10,7 @@ import { Card } from '@/components/ui/Card';
 import { PollHeader } from '@/components/polls/PollHeader';
 import { VotingForm } from '@/components/polls/VotingForm';
 import { ShareButton } from '@/components/polls/ShareButton';
+import { QrCodeCard } from '@/components/polls/QrCodeCard';
 import { PollResults } from '@/components/polls/PollResults';
 import type { Poll } from '@/lib/types';
 
@@ -116,6 +117,11 @@ export default function PollPage() {
         <div className="mb-8 flex items-start justify-between">
           <PollHeader poll={poll} />
           <ShareButton pollId={poll.id} />
+        </div>
+
+        {/* Share section with QR code */}
+        <div className="mb-8">
+          <QrCodeCard pollId={poll.id} pollTitle={poll.title} />
         </div>
 
         {/* Voting disabled message */}

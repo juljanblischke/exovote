@@ -143,7 +143,12 @@
     "share": {
       "title": "Share Poll",
       "copyLink": "Copy link",
-      "copied": "Copied!"
+      "copied": "Copied!",
+      "qrCode": "QR Code",
+      "qrCodeAlt": "QR code for poll: {title}",
+      "downloadPng": "Download PNG",
+      "downloadSvg": "Download SVG",
+      "scanToVote": "Scan to vote"
     },
     "errors": {
       "notFound": "Poll not found",
