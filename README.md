@@ -86,15 +86,17 @@ ExoVote can display an interactive world map showing where votes come from. This
 ### Setup
 
 1. Create a free account at [maxmind.com](https://www.maxmind.com/en/geolite2/signup)
-2. Generate a license key under **Account > Manage License Keys**
-3. Add `MAXMIND_LICENSE_KEY` to your environment:
+2. Go to **Account > Manage License Keys** and generate a key
+3. Note your **Account ID** (shown on the account page, e.g. `123456`)
+4. Add both to your environment:
 
 **Docker (production):** Add to your `.env` file on the server:
 ```env
+MAXMIND_ACCOUNT_ID=123456
 MAXMIND_LICENSE_KEY=your_license_key_here
 ```
 
-**GitHub Actions:** Add `MAXMIND_LICENSE_KEY` as a repository secret if you pass env vars during deploy.
+**GitHub Actions:** Add `MAXMIND_ACCOUNT_ID` and `MAXMIND_LICENSE_KEY` as repository secrets if you pass env vars during deploy.
 
 **Local development:** Set in your shell or `appsettings.Development.json`:
 ```json
@@ -109,7 +111,7 @@ The database is downloaded automatically on container startup and cached in a Do
 
 ### Without MaxMind
 
-If `MAXMIND_LICENSE_KEY` is not set, geolocation is simply disabled — the map won't appear on poll results pages, and everything else works normally.
+If `MAXMIND_ACCOUNT_ID` or `MAXMIND_LICENSE_KEY` is not set, geolocation is simply disabled — the map won't appear on poll results pages, and everything else works normally.
 
 ## Contributing
 

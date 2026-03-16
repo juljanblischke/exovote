@@ -84,6 +84,7 @@ services:
       - ConnectionStrings__RabbitMq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/
       - Cors__AllowedOrigins__0=https://${DOMAIN}
       - GeoIP__DatabasePath=/app/data/geoip/GeoLite2-Country.mmdb
+      - MAXMIND_ACCOUNT_ID=${MAXMIND_ACCOUNT_ID:-}
       - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY:-}
     depends_on:
       postgres:
