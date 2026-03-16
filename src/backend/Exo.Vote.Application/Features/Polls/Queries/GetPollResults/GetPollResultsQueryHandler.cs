@@ -80,6 +80,17 @@ public sealed class GetPollResultsQueryHandler : IQueryHandler<GetPollResultsQue
             .OrderByDescending(c => c.VotedAt)
             .ToList();
 
+        var geoData = poll.Votes
+            .Where(v => v.CountryCode is not null)
+            .GroupBy(v => v.CountryCode!)
+            .Select(g => new GeoVoteDataDto(
+                g.Key,
+                g.First().Region,
+                g.Select(v => v.VoterName).Distinct(StringComparer.OrdinalIgnoreCase).Count()
+            ))
+            .OrderByDescending(g => g.VoteCount)
+            .ToList();
+
         var response = new GetPollResultsResponse(
             poll.Id,
             poll.Title,
@@ -87,7 +98,8 @@ public sealed class GetPollResultsQueryHandler : IQueryHandler<GetPollResultsQue
             poll.Status,
             totalVoters,
             options,
-            customAnswers
+            customAnswers,
+            geoData
         );
 
         await _cache.SetAsync(cacheKey, response, TimeSpan.FromMinutes(2), cancellationToken);

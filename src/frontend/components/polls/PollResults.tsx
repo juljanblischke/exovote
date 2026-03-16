@@ -8,6 +8,7 @@ import { Wifi, WifiOff, ChevronDown, ChevronUp, Trophy, MessageCircle } from 'lu
 import clsx from 'clsx';
 import { apiFetch } from '@/lib/api';
 import { Card } from '@/components/ui/Card';
+import { GeoMap } from '@/components/polls/GeoMap';
 import type { PollType, PollResults as PollResultsType, PollResultOption } from '@/lib/types';
 
 type PollResultsProps = {
@@ -142,6 +143,7 @@ export function PollResults({ pollId, pollType, isExpired }: PollResultsProps) {
   const isRanked = pollType === 'Ranked';
 
   return (
+    <>
     <Card glass>
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
@@ -226,6 +228,12 @@ export function PollResults({ pollId, pollType, isExpired }: PollResultsProps) {
         </div>
       )}
     </Card>
+
+    {/* Geographic Vote Map */}
+    {(results.geoData ?? []).length > 0 && (
+      <GeoMap geoData={results.geoData} />
+    )}
+    </>
   );
 }
 

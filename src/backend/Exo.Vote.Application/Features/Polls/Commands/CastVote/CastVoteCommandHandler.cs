@@ -11,17 +11,20 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
     private readonly ICacheService _cache;
     private readonly IMessageBus _messageBus;
     private readonly IVoteNotificationService _notificationService;
+    private readonly IGeoLocationService _geoLocationService;
 
     public CastVoteCommandHandler(
         IAppDbContext context,
         ICacheService cache,
         IMessageBus messageBus,
-        IVoteNotificationService notificationService)
+        IVoteNotificationService notificationService,
+        IGeoLocationService geoLocationService)
     {
         _context = context;
         _cache = cache;
         _messageBus = messageBus;
         _notificationService = notificationService;
+        _geoLocationService = geoLocationService;
     }
 
     public async ValueTask<CastVoteResponse> Handle(
@@ -121,6 +124,9 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
             throw new InvalidOperationException("At least one selection or a custom answer is required");
         }
 
+        // Resolve geolocation from IP (transient — IP is never stored)
+        var geoLocation = await _geoLocationService.ResolveAsync(command.ClientIpAddress);
+
         // Create vote records
         var voterId = Guid.NewGuid().ToString();
         if (command.Selections.Count > 0)
@@ -135,6 +141,8 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
                     VoterName = command.VoterName,
                     Rank = selection.Rank,
                     CustomAnswerText = command.CustomAnswerText,
+                    CountryCode = geoLocation?.CountryCode,
+                    Region = geoLocation?.Region,
                     VotedAt = DateTime.UtcNow
                 };
 
@@ -152,6 +160,8 @@ public sealed class CastVoteCommandHandler : ICommandHandler<CastVoteCommand, Ca
                 VoterId = voterId,
                 VoterName = command.VoterName,
                 CustomAnswerText = command.CustomAnswerText,
+                CountryCode = geoLocation?.CountryCode,
+                Region = geoLocation?.Region,
                 VotedAt = DateTime.UtcNow
             };
 

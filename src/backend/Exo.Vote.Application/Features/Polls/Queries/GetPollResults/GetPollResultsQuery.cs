@@ -12,7 +12,14 @@ public sealed record GetPollResultsResponse(
     PollStatus Status,
     int TotalVoters,
     IList<OptionResultDto> Options,
-    IList<CustomAnswerDto> CustomAnswers
+    IList<CustomAnswerDto> CustomAnswers,
+    IList<GeoVoteDataDto> GeoData
+);
+
+public sealed record GeoVoteDataDto(
+    string CountryCode,
+    string? Region,
+    int VoteCount
 );
 
 public sealed record CustomAnswerDto(

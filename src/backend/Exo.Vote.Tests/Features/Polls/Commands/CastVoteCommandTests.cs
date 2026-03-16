@@ -13,6 +13,7 @@ public class CastVoteCommandTests
     private readonly ICacheService _cache = Substitute.For<ICacheService>();
     private readonly IMessageBus _messageBus = Substitute.For<IMessageBus>();
     private readonly IVoteNotificationService _notificationService = Substitute.For<IVoteNotificationService>();
+    private readonly IGeoLocationService _geoLocationService = Substitute.For<IGeoLocationService>();
 
     private async Task<PollEntity> SeedActivePoll(Infrastructure.Persistence.AppDbContext context)
     {
@@ -41,7 +42,7 @@ public class CastVoteCommandTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(
@@ -69,7 +70,7 @@ public class CastVoteCommandTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
 
@@ -103,7 +104,7 @@ public class CastVoteCommandTests
         poll.Status = PollStatus.Closed;
         await context.SaveChangesAsync();
 
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(
@@ -123,7 +124,7 @@ public class CastVoteCommandTests
     {
         // Arrange
         using var context = TestDbContextFactory.Create();
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var command = new CastVoteCommand(
             PollId: Guid.NewGuid(),
@@ -142,7 +143,7 @@ public class CastVoteCommandTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var options = poll.Options.ToList();
         var command = new CastVoteCommand(
@@ -167,7 +168,7 @@ public class CastVoteCommandTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var command = new CastVoteCommand(
             PollId: poll.Id,
@@ -187,7 +188,7 @@ public class CastVoteCommandTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(

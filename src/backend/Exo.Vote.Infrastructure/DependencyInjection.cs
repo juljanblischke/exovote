@@ -29,6 +29,13 @@ public static class DependencyInjection
             services.AddScoped<ICacheService, CacheService>();
         }
 
+        // GeoIP
+        var geoIpPath = configuration["GeoIP:DatabasePath"];
+        services.AddSingleton<IGeoLocationService>(sp =>
+            new MaxMindGeoLocationService(
+                geoIpPath,
+                sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<MaxMindGeoLocationService>>()));
+
         // RabbitMQ
         var rabbitMqConnectionString = configuration.GetConnectionString("RabbitMq");
         if (!string.IsNullOrEmpty(rabbitMqConnectionString))

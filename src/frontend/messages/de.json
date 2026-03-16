@@ -158,7 +158,14 @@
       "customAnswers": "Eigene Antworten",
       "noCustomAnswers": "Noch keine eigenen Antworten",
       "pollActive": "Aktiv",
-      "pollExpired": "Abgelaufen"
+      "pollExpired": "Abgelaufen",
+      "geoMap": {
+        "title": "Herkunft der Stimmen",
+        "subtitle": "Ungefährer Standort basierend auf dem Netzwerk, nicht präzise",
+        "votes": "{count, plural, one {1 Stimme} other {# Stimmen}}",
+        "noData": "Keine geografischen Daten verfügbar",
+        "unknown": "Unbekannt"
+      }
     },
     "share": {
       "title": "Umfrage teilen",

@@ -40,6 +40,14 @@ public class VoteConfiguration : IEntityTypeConfiguration<VoteEntity>
             .HasColumnName("custom_answer_text")
             .HasMaxLength(200);
 
+        builder.Property(v => v.CountryCode)
+            .HasColumnName("country_code")
+            .HasMaxLength(2);
+
+        builder.Property(v => v.Region)
+            .HasColumnName("region")
+            .HasMaxLength(100);
+
         builder.Property(v => v.VotedAt)
             .HasColumnName("voted_at");
 

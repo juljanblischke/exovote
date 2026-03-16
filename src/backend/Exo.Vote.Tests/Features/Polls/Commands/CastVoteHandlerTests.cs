@@ -12,6 +12,7 @@ public class CastVoteHandlerTests
     private readonly ICacheService _cache = Substitute.For<ICacheService>();
     private readonly IMessageBus _messageBus = Substitute.For<IMessageBus>();
     private readonly IVoteNotificationService _notificationService = Substitute.For<IVoteNotificationService>();
+    private readonly IGeoLocationService _geoLocationService = Substitute.For<IGeoLocationService>();
 
     private async Task<PollEntity> SeedActivePoll(
         Infrastructure.Persistence.AppDbContext context,
@@ -43,7 +44,7 @@ public class CastVoteHandlerTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context, expiresAt: DateTime.UtcNow.AddHours(-1));
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(
@@ -64,7 +65,7 @@ public class CastVoteHandlerTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context, expiresAt: DateTime.UtcNow.AddHours(1));
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(
@@ -87,7 +88,7 @@ public class CastVoteHandlerTests
         // Arrange
         using var context = TestDbContextFactory.Create();
         var poll = await SeedActivePoll(context, expiresAt: null);
-        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService);
+        var handler = new CastVoteCommandHandler(context, _cache, _messageBus, _notificationService, _geoLocationService);
 
         var optionId = poll.Options.First().Id;
         var command = new CastVoteCommand(

@@ -6,7 +6,8 @@ public sealed record CastVoteCommand(
     Guid PollId,
     string VoterName,
     IList<VoteSelection> Selections,
-    string? CustomAnswerText = null
+    string? CustomAnswerText = null,
+    string? ClientIpAddress = null
 ) : ICommand<CastVoteResponse>;
 
 public sealed record VoteSelection(
