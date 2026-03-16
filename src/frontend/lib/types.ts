@@ -39,9 +39,16 @@ export type CustomAnswer = {
   votedAt: string;
 };
 
+export type GeoVoteData = {
+  countryCode: string;
+  region: string | null;
+  voteCount: number;
+};
+
 export type PollResults = {
   pollId: string;
   totalVoters: number;
   options: PollResultOption[];
   customAnswers: CustomAnswer[];
+  geoData: GeoVoteData[];
 };

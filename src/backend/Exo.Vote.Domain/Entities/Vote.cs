@@ -10,6 +10,8 @@ public class Vote : BaseEntity
     public string VoterName { get; set; } = string.Empty;
     public int? Rank { get; set; }
     public string? CustomAnswerText { get; set; }
+    public string? CountryCode { get; set; }
+    public string? Region { get; set; }
     public DateTime VotedAt { get; set; } = DateTime.UtcNow;
 
     public Poll Poll { get; set; } = null!;

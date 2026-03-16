@@ -158,7 +158,14 @@
       "customAnswers": "Custom Answers",
       "noCustomAnswers": "No custom answers yet",
       "pollActive": "Active",
-      "pollExpired": "Expired"
+      "pollExpired": "Expired",
+      "geoMap": {
+        "title": "Vote Origins",
+        "subtitle": "Approximate location based on network, not precise",
+        "votes": "{count, plural, one {1 vote} other {# votes}}",
+        "noData": "No geographic data available",
+        "unknown": "Unknown"
+      }
     },
     "share": {
       "title": "Share Poll",

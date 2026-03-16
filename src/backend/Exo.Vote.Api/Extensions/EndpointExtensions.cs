@@ -29,9 +29,10 @@ public static class EndpointExtensions
         })
         .WithName("GetPollById");
 
-        polls.MapPost("/{pollId:guid}/votes", async (Guid pollId, CastVoteRequest request, IMediator mediator) =>
+        polls.MapPost("/{pollId:guid}/votes", async (Guid pollId, CastVoteRequest request, HttpContext httpContext, IMediator mediator) =>
         {
-            var command = new CastVoteCommand(pollId, request.VoterName, request.Selections, request.CustomAnswerText);
+            var clientIp = httpContext.Connection.RemoteIpAddress?.ToString();
+            var command = new CastVoteCommand(pollId, request.VoterName, request.Selections, request.CustomAnswerText, clientIp);
             var result = await mediator.Send(command);
             return Results.Ok(ApiResponse<CastVoteResponse>.Ok(result));
         })

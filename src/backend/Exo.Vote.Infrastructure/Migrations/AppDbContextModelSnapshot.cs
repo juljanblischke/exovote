@@ -144,6 +144,11 @@ namespace Exo.Vote.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("CountryCode")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("country_code");
+
                     b.Property<string>("CustomAnswerText")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
@@ -160,6 +165,11 @@ namespace Exo.Vote.Infrastructure.Migrations
                     b.Property<int?>("Rank")
                         .HasColumnType("integer")
                         .HasColumnName("rank");
+
+                    b.Property<string>("Region")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("region");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
