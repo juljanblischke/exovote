@@ -32,7 +32,9 @@ RUN dotnet publish "Exo.Vote.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 FROM base AS production
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["Exo.Vote.Api/entrypoint.sh", "/app/entrypoint.sh"]
+RUN chmod +x /app/entrypoint.sh && mkdir -p /app/data/geoip && chown -R appuser:appgroup /app/data
 
 USER appuser
 
-ENTRYPOINT ["dotnet", "Exo.Vote.Api.dll"]
+ENTRYPOINT ["/app/entrypoint.sh"]

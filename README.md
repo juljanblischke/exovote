@@ -12,6 +12,7 @@ Built with **ASP.NET Core 9**, **Next.js 15**, **PostgreSQL**, **Redis** & **Rab
 - Dark/light mode
 - Multi-language (German, English)
 - GDPR compliant
+- Geographic vote visualization (optional, privacy-respecting)
 - Self-hosted with Docker
 
 ## Tech Stack
@@ -77,6 +78,38 @@ exovote/
 ├── CLAUDE.md                       # AI agent instructions
 └── CODING-INSTRUCTION.md           # Session templates
 ```
+
+## Geographic Vote Map (Optional)
+
+ExoVote can display an interactive world map showing where votes come from. This uses [MaxMind GeoLite2](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) for privacy-respecting, country-level geolocation. **IP addresses are never stored** — they are resolved to a country/region at vote time and immediately discarded.
+
+### Setup
+
+1. Create a free account at [maxmind.com](https://www.maxmind.com/en/geolite2/signup)
+2. Generate a license key under **Account > Manage License Keys**
+3. Add `MAXMIND_LICENSE_KEY` to your environment:
+
+**Docker (production):** Add to your `.env` file on the server:
+```env
+MAXMIND_LICENSE_KEY=your_license_key_here
+```
+
+**GitHub Actions:** Add `MAXMIND_LICENSE_KEY` as a repository secret if you pass env vars during deploy.
+
+**Local development:** Set in your shell or `appsettings.Development.json`:
+```json
+{
+  "GeoIP": {
+    "DatabasePath": "/path/to/GeoLite2-Country.mmdb"
+  }
+}
+```
+
+The database is downloaded automatically on container startup and cached in a Docker volume (`geoip_data`). It re-downloads after 7 days to stay current.
+
+### Without MaxMind
+
+If `MAXMIND_LICENSE_KEY` is not set, geolocation is simply disabled — the map won't appear on poll results pages, and everything else works normally.
 
 ## Contributing
 

@@ -83,6 +83,8 @@ services:
       - ConnectionStrings__Redis=redis:6379,password=${REDIS_PASSWORD}
       - ConnectionStrings__RabbitMq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/
       - Cors__AllowedOrigins__0=https://${DOMAIN}
+      - GeoIP__DatabasePath=/app/data/geoip/GeoLite2-Country.mmdb
+      - MAXMIND_LICENSE_KEY=${MAXMIND_LICENSE_KEY:-}
     depends_on:
       postgres:
         condition: service_healthy
@@ -90,6 +92,8 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+    volumes:
+      - geoip_data:/app/data/geoip
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 15s
@@ -176,6 +180,7 @@ volumes:
   postgres_data:
   redis_data:
   rabbitmq_data:
+  geoip_data:
 
 networks:
   exovote:
